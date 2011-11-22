@@ -32,3 +32,6 @@ git pull
 cd ..
 stg sync -s patches/series
 
+>> Pushing to local upstream
+stg publish
+git push <remote> master.public:master
