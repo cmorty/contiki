@@ -1,0 +1,22 @@
+Optimize build process
+
+From: Moritz 'Morty' Strübe <morty@gmx.net>
+
+
+---
+ tools/coffee-manager/build.xml |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/tools/coffee-manager/build.xml b/tools/coffee-manager/build.xml
+index 0712f73..28e1ed8 100644
+--- a/tools/coffee-manager/build.xml
++++ b/tools/coffee-manager/build.xml
+@@ -7,7 +7,7 @@
+ 
+   <target name="compile" depends="init">
+     <mkdir dir="build"/>
+-    <javac srcdir="se/sics/coffee" destdir="build" includeantruntime="false" />
++    <javac srcdir="." destdir="build" includeantruntime="false" />
+   </target>
+ 
+   <target name="clean" depends="init">
