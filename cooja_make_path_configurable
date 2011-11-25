@@ -9,7 +9,7 @@ Subject: [PATCH] Make paths more configurable
  2 files changed, 84 insertions(+), 33 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index 7ee05ee..d77a241 100644
+index 7ee05ee..cc2288d 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
 @@ -60,13 +60,16 @@ import java.io.InputStream;

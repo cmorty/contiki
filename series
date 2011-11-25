@@ -10,3 +10,4 @@ cooja_make_path_configurable
 contiki_sky_moteids
 contiki_sky_ihex
 cooja_getVariableNames
+cooja_projct_delete_dialog
