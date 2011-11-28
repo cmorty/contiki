@@ -4,8 +4,9 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
 
 
 ---
- tools/coffee-manager/build.xml |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ tools/coffee-manager/build.xml           |    2 +-
+ tools/cooja/apps/serial_socket/build.xml |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/tools/coffee-manager/build.xml b/tools/coffee-manager/build.xml
 index 0712f73..28e1ed8 100644
@@ -20,3 +21,16 @@ index 0712f73..28e1ed8 100644
    </target>
  
    <target name="clean" depends="init">
+diff --git a/tools/cooja/apps/serial_socket/build.xml b/tools/cooja/apps/serial_socket/build.xml
+index 7164eb2..a8ed17b 100644
+--- a/tools/cooja/apps/serial_socket/build.xml
++++ b/tools/cooja/apps/serial_socket/build.xml
+@@ -22,7 +22,7 @@
+ 	<delete dir="build"/>
+   </target>
+ 
+-  <target name="jar" depends="clean, init, compile">
++  <target name="jar" depends="init, compile">
+     <mkdir dir="lib"/>
+     <jar destfile="lib/serial_socket.jar" basedir="build">
+       <manifest>
