@@ -11,3 +11,4 @@ contiki_sky_moteids
 contiki_sky_ihex
 cooja_getVariableNames
 cooja_projct_delete_dialog
+cooja_breakpoint
