@@ -4,12 +4,12 @@ From: =?UTF-8?q?Moritz=20'Morty'=20Str=C3=BCbe?= <morty@gmx.net>
 
 Subject: [PATCH] Make paths more configurable
 ---
- tools/cooja/java/se/sics/cooja/GUI.java           |  115 +++++++++++++++------
+ tools/cooja/java/se/sics/cooja/GUI.java           |  117 +++++++++++++++------
  tools/cooja/java/se/sics/cooja/ProjectConfig.java |    2 
- 2 files changed, 84 insertions(+), 33 deletions(-)
+ 2 files changed, 85 insertions(+), 34 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index 7ee05ee..cc2288d 100644
+index 7ee05ee..59fbb32 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
 @@ -60,13 +60,16 @@ import java.io.InputStream;
@@ -29,6 +29,15 @@ index 7ee05ee..cc2288d 100644
  import java.util.Enumeration;
  import java.util.List;
  import java.util.Observable;
+@@ -237,7 +240,7 @@ public class GUI extends Observable {
+   public static Properties currentExternalToolsSettings;
+ 
+   private static final String externalToolsSettingNames[] = new String[] {
+-    "PATH_CONTIKI", "PATH_COOJA_CORE_RELATIVE",
++    "PATH_CONTIKI", "PATH_COOJA_CORE_RELATIVE", "PATH_COOJA", "PATH_APPS",
+ 
+     "PATH_MAKE",
+     "PATH_SHELL",
 @@ -3938,52 +3941,99 @@ public class GUI extends Observable {
      return file;
    }
