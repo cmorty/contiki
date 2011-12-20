@@ -1,4 +1,4 @@
-# This series applies on GIT commit 6409dc8742e277a77954487611c4fccb4ef1a09e
+# This series applies on GIT commit 653d2f52d14192310eb305f1ce7524a7005742c1
 cooja_load_all
 cooja_javascript_warnings
 cooja_motes_uninit
@@ -14,3 +14,4 @@ cooja_projct_delete_dialog
 cooja_breakpoint
 cooja_project_search
 cooja_log4j
+contiki_symbols_if_needed

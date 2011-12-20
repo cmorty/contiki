@@ -1,0 +1,23 @@
+From ac23790e6de6fb3b63609bcd55a96f753c6388a3 Mon Sep 17 00:00:00 2001
+
+From: Moritz 'Morty' Strübe <morty@gmx.net>
+
+Only build symbols for Sky if they are needed.
+---
+ platform/sky/Makefile.common |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/platform/sky/Makefile.common b/platform/sky/Makefile.common
+index 86094db..559d9f6 100644
+--- a/platform/sky/Makefile.common
++++ b/platform/sky/Makefile.common
+@@ -31,7 +31,9 @@ CONTIKI_TARGET_SOURCEFILES += contiki-sky-platform.c
+ MCU=msp430x1611
+ include $(CONTIKI)/cpu/msp430/Makefile.msp430
+ 
++ifdef CORE
+ contiki-$(TARGET).a: ${addprefix $(OBJECTDIR)/,symbols.o}
++endif
+ #	$(AR) rcf $@ $^
+ 
+ 
