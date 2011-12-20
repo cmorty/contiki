@@ -1,0 +1,129 @@
+From bccfa6566e066975f1839cc9bbf36d94a755ce43 Mon Sep 17 00:00:00 2001
+
+From: Moritz 'Morty' Strübe <morty@gmx.net>
+
+Make reimaddr-functions more efficient
+---
+ core/net/rime/rimeaddr.h |   77 +++++++++++++++++++++++++++++++++-------------
+ 1 files changed, 55 insertions(+), 22 deletions(-)
+
+diff --git a/core/net/rime/rimeaddr.h b/core/net/rime/rimeaddr.h
+index c46f6b3..7a3cb12 100644
+--- a/core/net/rime/rimeaddr.h
++++ b/core/net/rime/rimeaddr.h
+@@ -63,12 +63,42 @@
+ #define RIMEADDR_SIZE 2
+ #endif /* RIMEADDR_SIZE */
+ 
++#ifndef RIMEADDR_MEM_FUNC
++#define RIMEADDR_MEM_FUNC 1
++#endif
++
+ typedef union {
+   unsigned char u8[RIMEADDR_SIZE];
+ } rimeaddr_t;
+ 
+ 
+ /**
++ * \brief      The Rime address of the node
++ *
++ *             This variable contains the Rime address of the
++ *             node. This variable should not be changed directly;
++ *             rather, the rimeaddr_set_node_addr() function should be
++ *             used.
++ *
++ */
++extern rimeaddr_t rimeaddr_node_addr;
++
++/**
++ * \brief      The null Rime address
++ *
++ *             This variable contains the null Rime address. The null
++ *             address is used in route tables to indicate that the
++ *             table entry is unused. Nodes with no configured address
++ *             has the null address. Nodes with their node address set
++ *             to the null address will have problems communicating
++ *             with other nodes.
++ *
++ */
++extern const rimeaddr_t rimeaddr_null;
++
++
++
++/**
+  * \brief      Copy a Rime address
+  * \param dest The destination
+  * \param from The source
+@@ -77,7 +107,14 @@ typedef union {
+  *             to another.
+  *
+  */
++#if ! RIMEADDR_MEM_FUNC
+ void rimeaddr_copy(rimeaddr_t *dest, const rimeaddr_t *from);
++#else
++extern inline void rimeaddr_copy(rimeaddr_t *dest, const rimeaddr_t *from)
++{
++	memcpy((char *)dest, (char *)from, RIMEADDR_SIZE);
++}
++#endif
+ 
+ /**
+  * \brief      Compare two Rime addresses
+@@ -91,7 +128,17 @@ void rimeaddr_copy(rimeaddr_t *dest, const rimeaddr_t *from);
+  *             are the same, and zero if the addresses are different.
+  *
+  */
++
++#if ! RIMEADDR_MEM_FUNC
+ int rimeaddr_cmp(const rimeaddr_t *addr1, const rimeaddr_t *addr2);
++#else
++extern inline int rimeaddr_cmp(const rimeaddr_t *addr1, const rimeaddr_t *addr2)
++{
++	return memcmp((char *)addr1, (char *)addr2, RIMEADDR_SIZE);
++}
++#endif
++
++
+ 
+ 
+ /**
+@@ -101,31 +148,17 @@ int rimeaddr_cmp(const rimeaddr_t *addr1, const rimeaddr_t *addr2);
+  *             This function sets the Rime address of the node.
+  *
+  */
++#if ! RIMEADDR_MEM_FUNC
+ void rimeaddr_set_node_addr(rimeaddr_t *addr);
++#else
++extern inline void rimeaddr_set_node_addr(rimeaddr_t *t)
++{
++  rimeaddr_copy(&rimeaddr_node_addr, t);
++}
++#endif
++
+ 
+-/**
+- * \brief      The Rime address of the node
+- *
+- *             This variable contains the Rime address of the
+- *             node. This variable should not be changed directly;
+- *             rather, the rimeaddr_set_node_addr() function should be
+- *             used.
+- *
+- */
+-extern rimeaddr_t rimeaddr_node_addr;
+ 
+-/**
+- * \brief      The null Rime address
+- *
+- *             This variable contains the null Rime address. The null
+- *             address is used in route tables to indicate that the
+- *             table entry is unused. Nodes with no configured address
+- *             has the null address. Nodes with their node address set
+- *             to the null address will have problems communicating
+- *             with other nodes.
+- *
+- */
+-extern const rimeaddr_t rimeaddr_null;
+ 
+ #endif /* __RIMEADDR_H__ */
+ /** @} */
