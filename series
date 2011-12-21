@@ -16,3 +16,4 @@ cooja_project_search
 cooja_log4j
 contiki_symbols_if_needed
 contiki_rime_memfunc
+cooja_contiki_path_cmd_override
