@@ -8,7 +8,7 @@ Make reimaddr-functions more efficient
  1 files changed, 55 insertions(+), 22 deletions(-)
 
 diff --git a/core/net/rime/rimeaddr.h b/core/net/rime/rimeaddr.h
-index c46f6b3..7a3cb12 100644
+index c46f6b3..193dca6 100644
 --- a/core/net/rime/rimeaddr.h
 +++ b/core/net/rime/rimeaddr.h
 @@ -63,12 +63,42 @@
@@ -79,7 +79,7 @@ index c46f6b3..7a3cb12 100644
 +#else
 +extern inline int rimeaddr_cmp(const rimeaddr_t *addr1, const rimeaddr_t *addr2)
 +{
-+	return memcmp((char *)addr1, (char *)addr2, RIMEADDR_SIZE);
++	return !memcmp((char *)addr1, (char *)addr2, RIMEADDR_SIZE);
 +}
 +#endif
 +
