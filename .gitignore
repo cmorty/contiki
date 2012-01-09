@@ -63,7 +63,6 @@ contiki-cc2530dk.lib
 *.banks
 *.sensinode
 *.cc2530dk
-
 # VC++ build artifacts
 *.exp
 *.ilk
@@ -84,3 +83,5 @@ contiki-cc2530dk.lib
 
 #regression tests artifacts
 *.testlog
+.cproject
+.project
