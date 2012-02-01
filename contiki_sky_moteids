@@ -8,10 +8,10 @@ Subject: Support MOTEIDS for flashing, etc
  1 files changed, 10 insertions(+), 3 deletions(-)
 
 diff --git a/platform/sky/Makefile.common b/platform/sky/Makefile.common
-index ebfbea6..bd78256 100644
+index 066cad8..c67611a 100644
 --- a/platform/sky/Makefile.common
 +++ b/platform/sky/Makefile.common
-@@ -87,9 +87,16 @@ ifndef MOTELIST
+@@ -83,9 +83,16 @@ ifndef MOTELIST
      BSL = $(CONTIKI)/tools/sky/msp430-bsl-linux --telosb
      BSL_FILETYPE = -I
    endif

@@ -8,10 +8,10 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
  1 files changed, 3 insertions(+), 7 deletions(-)
 
 diff --git a/platform/sky/Makefile.common b/platform/sky/Makefile.common
-index bd78256..86094db 100644
+index c67611a..c62cc23 100644
 --- a/platform/sky/Makefile.common
 +++ b/platform/sky/Makefile.common
-@@ -44,7 +44,6 @@ endif
+@@ -40,7 +40,6 @@ endif
  endif
  
  NUMPAR=20
@@ -19,7 +19,7 @@ index bd78256..86094db 100644
  
  # Check if we are running under Windows
  ifdef OS
-@@ -109,20 +108,17 @@ sky-motes:
+@@ -105,20 +104,17 @@ sky-motes:
  
  ifdef MOTE
  %.upload: %.ihex
