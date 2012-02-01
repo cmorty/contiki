@@ -1,4 +1,4 @@
-# This series applies on GIT commit f28b0f4841b362ffded0f78f1b81f26fa7170138
+# This series applies on GIT commit 84c2f92dcb43d6cd701b7423a31705e62dcb8258
 cooja_load_all
 cooja_javascript_warnings
 cooja_motes_uninit
@@ -17,3 +17,4 @@ cooja_log4j
 contiki_symbols_if_needed
 contiki_rime_memfunc
 cooja_contiki_path_cmd_override
+cooja_fix_openjdk_logscript
