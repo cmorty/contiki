@@ -71,11 +71,12 @@ data_packet_received(struct multihop_conn *multihop,
   struct route_entry *rt;
 
   /* Refresh the route when we hear a packet from a neighbor. */
+
   rt = route_lookup(from);
   if(rt != NULL) {
     route_refresh(rt);
   }
-  
+
   if(c->cb->recv) {
     c->cb->recv(c, from, hops);
   }
