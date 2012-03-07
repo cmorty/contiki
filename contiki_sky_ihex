@@ -8,7 +8,7 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
  1 files changed, 3 insertions(+), 7 deletions(-)
 
 diff --git a/platform/sky/Makefile.common b/platform/sky/Makefile.common
-index c67611a..c62cc23 100644
+index a8b1cfc..1901ec3 100644
 --- a/platform/sky/Makefile.common
 +++ b/platform/sky/Makefile.common
 @@ -40,7 +40,6 @@ endif
@@ -18,8 +18,8 @@ index c67611a..c62cc23 100644
 -IHEXFILE=tmpimage.ihex
  
  # Check if we are running under Windows
- ifdef OS
-@@ -105,20 +104,17 @@ sky-motes:
+ ifeq ($(HOST_OS),Windows)
+@@ -103,20 +102,17 @@ sky-motes:
  
  ifdef MOTE
  %.upload: %.ihex
