@@ -9,15 +9,15 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/tools/coffee-manager/build.xml b/tools/coffee-manager/build.xml
-index 0712f73..28e1ed8 100644
+index cf6ff55..c480526 100644
 --- a/tools/coffee-manager/build.xml
 +++ b/tools/coffee-manager/build.xml
 @@ -7,7 +7,7 @@
  
    <target name="compile" depends="init">
      <mkdir dir="build"/>
--    <javac srcdir="se/sics/coffee" destdir="build" includeantruntime="false" />
-+    <javac srcdir="." destdir="build" includeantruntime="false" />
+-    <javac srcdir="se/sics/coffee" destdir="build" includeantruntime="false" debug="true" />
++    <javac srcdir="." destdir="build" includeantruntime="false" debug="true" />
    </target>
  
    <target name="clean" depends="init">
