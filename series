@@ -18,3 +18,4 @@ contiki_symbols_if_needed
 contiki_rime_memfunc
 cooja_contiki_path_cmd_override
 cooja_fix_openjdk_logscript
+contiki_add-mesh_ready-to-mesh
