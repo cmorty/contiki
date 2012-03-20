@@ -9,7 +9,7 @@ Subject: [PATCH] Make paths more configurable
  2 files changed, 85 insertions(+), 34 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index 7ee05ee..59fbb32 100644
+index ac614a3..532bcb2 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
 @@ -60,13 +60,16 @@ import java.io.InputStream;
@@ -38,7 +38,7 @@ index 7ee05ee..59fbb32 100644
  
      "PATH_MAKE",
      "PATH_SHELL",
-@@ -3938,52 +3941,99 @@ public class GUI extends Observable {
+@@ -3947,52 +3950,99 @@ public class GUI extends Observable {
      return file;
    }
  
@@ -170,7 +170,7 @@ index 7ee05ee..59fbb32 100644
      }
    }
  
-@@ -4427,3 +4477,4 @@ public class GUI extends Observable {
+@@ -4436,3 +4486,4 @@ public class GUI extends Observable {
    };
    
  }

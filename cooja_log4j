@@ -8,10 +8,10 @@ Allow setting a log4j config file
  1 files changed, 16 insertions(+), 2 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index 7e0ad4b..f5ba21d 100644
+index 30d968e..b180c6f 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
-@@ -2952,10 +2952,24 @@ public class GUI extends Observable {
+@@ -2961,10 +2961,24 @@ public class GUI extends Observable {
     *          null
     */
    public static void main(String[] args) {

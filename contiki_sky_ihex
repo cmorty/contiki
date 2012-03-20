@@ -8,18 +8,18 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
  1 files changed, 3 insertions(+), 7 deletions(-)
 
 diff --git a/platform/sky/Makefile.common b/platform/sky/Makefile.common
-index a8b1cfc..1901ec3 100644
+index 1cc357e..2fcb9db 100644
 --- a/platform/sky/Makefile.common
 +++ b/platform/sky/Makefile.common
-@@ -40,7 +40,6 @@ endif
- endif
+@@ -34,7 +34,6 @@ LDFLAGS += $(LDFLAGSNO) -Felf -yn
+ endif # IAR
  
  NUMPAR=20
 -IHEXFILE=tmpimage.ihex
  
  # Check if we are running under Windows
  ifeq ($(HOST_OS),Windows)
-@@ -103,20 +102,17 @@ sky-motes:
+@@ -97,20 +96,17 @@ sky-motes:
  
  ifdef MOTE
  %.upload: %.ihex

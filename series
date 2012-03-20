@@ -1,4 +1,4 @@
-# This series applies on GIT commit d4b5c331e3181b7f421d8c8f8cf0f61358597102
+# This series applies on GIT commit 85df1eb4e4696a8aa1e1a2ffca6fab9ac2c364e2
 cooja_load_all
 cooja_javascript_warnings
 cooja_motes_uninit
@@ -9,7 +9,6 @@ cooja_optimize_build
 cooja_make_path_configurable
 contiki_sky_moteids
 contiki_sky_ihex
-cooja_getVariableNames
 cooja_projct_delete_dialog
 cooja_breakpoint
 cooja_project_search

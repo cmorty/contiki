@@ -9,10 +9,10 @@ Subject: [PATCH] Cooja: Load whole simulation before executing it in nogui mode
  2 files changed, 2 insertions(+), 4 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index 67628b0..7ee05ee 100644
+index 0915926..ac614a3 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
-@@ -3043,13 +3043,13 @@ public class GUI extends Observable {
+@@ -3052,13 +3052,13 @@ public class GUI extends Observable {
            }
            plugin.updateScript(scriptFile);
            plugin.setScriptActive(true);
