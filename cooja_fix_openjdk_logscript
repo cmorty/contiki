@@ -4,18 +4,18 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
 
 
 ---
- .../se/sics/cooja/plugins/LogScriptEngine.java     |    6 ---
+ .../se/sics/cooja/plugins/LogScriptEngine.java     |    7 ---
  .../java/se/sics/cooja/plugins/ScriptLog.java      |   43 ++++++++++++++++++++
- 2 files changed, 43 insertions(+), 6 deletions(-)
+ 2 files changed, 43 insertions(+), 7 deletions(-)
  create mode 100644 tools/cooja/java/se/sics/cooja/plugins/ScriptLog.java
 
 diff --git a/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java b/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
-index aeec0c1..6b4abf3 100644
+index d0dbaf4..57df536 100644
 --- a/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
 +++ b/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
-@@ -98,12 +98,6 @@ public class LogScriptEngine {
- 
-   private boolean scriptActive = false;
+@@ -103,13 +103,6 @@ public class LogScriptEngine {
+   private long startRealTime;
+   private long nextProgress;
  
 -  private interface ScriptLog {
 -    public void log(String log);
@@ -23,9 +23,10 @@ index aeec0c1..6b4abf3 100644
 -    public void testFailed();
 -    public void generateMessage(long delay, String msg);
 -  }
- 
-   /* Only called from the simulation loop */
-   private void stepScript() {
+-
+   public LogScriptEngine(Simulation simulation) {
+     this.simulation = simulation;
+   }
 diff --git a/tools/cooja/java/se/sics/cooja/plugins/ScriptLog.java b/tools/cooja/java/se/sics/cooja/plugins/ScriptLog.java
 new file mode 100644
 index 0000000..5048ae6

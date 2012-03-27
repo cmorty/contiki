@@ -4,12 +4,12 @@ From: =?UTF-8?q?Moritz=20'Morty'=20Str=C3=BCbe?= <morty@gmx.net>
 
 Subject: [PATCH] Make paths more configurable
 ---
- tools/cooja/java/se/sics/cooja/GUI.java           |  117 +++++++++++++++------
+ tools/cooja/java/se/sics/cooja/GUI.java           |  119 +++++++++++++++------
  tools/cooja/java/se/sics/cooja/ProjectConfig.java |    2 
- 2 files changed, 85 insertions(+), 34 deletions(-)
+ 2 files changed, 86 insertions(+), 35 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index ac614a3..532bcb2 100644
+index 58bfd3f..13291b5 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
 @@ -60,13 +60,16 @@ import java.io.InputStream;
@@ -38,7 +38,7 @@ index ac614a3..532bcb2 100644
  
      "PATH_MAKE",
      "PATH_SHELL",
-@@ -3947,52 +3950,99 @@ public class GUI extends Observable {
+@@ -3952,52 +3955,99 @@ public class GUI extends Observable {
      return file;
    }
  
@@ -53,6 +53,13 @@ index ac614a3..532bcb2 100644
      try {
 -      File contikiPath = new File(GUI.getExternalToolsSetting("PATH_CONTIKI", null));
 -      String contikiCanonical = contikiPath.getCanonicalPath();
+-
+-      String fileCanonical = file.getCanonicalPath();
+-      if (!fileCanonical.startsWith(contikiCanonical)) {
+-        /* File is not in a Contiki subdirectory */
+-        /*logger.info("File is not in a Contiki subdirectory: " + file.getAbsolutePath());*/
+-        return null;
+-      }
 +    	int elem = PATH_IDENTIFIER.length;
 +    	File path[] = new File [elem];
 +    	String canonicals[] = new String[elem];
@@ -78,30 +85,24 @@ index ac614a3..532bcb2 100644
 +      
 +	    if(match == -1) return null;
  
--      String fileCanonical = file.getCanonicalPath();
--      if (!fileCanonical.startsWith(contikiCanonical)) {
--        /* File is not in a Contiki subdirectory */
--        /*logger.info("File is not in a Contiki subdirectory: " + file.getAbsolutePath());*/
--        return null;
--      }
- 
 -      /* Replace Contiki's canonical path with Contiki identifier */
 -      String portablePath = fileCanonical.replaceFirst(
--          java.util.regex.Matcher.quoteReplacement(contikiCanonical), 
+-          java.util.regex.Matcher.quoteReplacement(contikiCanonical),
 -          java.util.regex.Matcher.quoteReplacement(PATH_CONTIKI_IDENTIFIER));
 -      File portable = new File(portablePath);
-+	    /* Replace Contiki's canonical path with Contiki identifier */
-+        String portablePath = fileCanonical.replaceFirst(
-+          java.util.regex.Matcher.quoteReplacement(canonicals[match]), 
-+          java.util.regex.Matcher.quoteReplacement(PATH_IDENTIFIER[match][0]));
-+        File portable = new File(portablePath);
-       
+ 
 -      /* Verify conversion */
 -      File verify = restoreContikiRelativePath(portable);
 -      if (verify == null || !verify.exists()) {
 -        /* Error: did file even exist pre-conversion? */
 -        return null;
 -      }
++	    /* Replace Contiki's canonical path with Contiki identifier */
++        String portablePath = fileCanonical.replaceFirst(
++          java.util.regex.Matcher.quoteReplacement(canonicals[match]), 
++          java.util.regex.Matcher.quoteReplacement(PATH_IDENTIFIER[match][0]));
++        File portable = new File(portablePath);
++      
 +        /* Verify conversion */
 +        File verify = restoreContikiRelativePath(portable);
 +        if (verify == null || !verify.exists()) {
@@ -170,9 +171,9 @@ index ac614a3..532bcb2 100644
      }
    }
  
-@@ -4436,3 +4486,4 @@ public class GUI extends Observable {
+@@ -4441,3 +4491,4 @@ public class GUI extends Observable {
    };
-   
+ 
  }
 +
 diff --git a/tools/cooja/java/se/sics/cooja/ProjectConfig.java b/tools/cooja/java/se/sics/cooja/ProjectConfig.java

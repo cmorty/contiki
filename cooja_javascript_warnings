@@ -4,12 +4,12 @@ From: =?UTF-8?q?Moritz=20'Morty'=20Str=C3=BCbe?= <morty@gmx.net>
 
 Subject: [PATCH] Cooja: Give better Javascript warnings
 ---
- .../se/sics/cooja/plugins/LogScriptEngine.java     |   40 +++++++++++++++++---
+ .../se/sics/cooja/plugins/LogScriptEngine.java     |   38 +++++++++++++++++---
  .../java/se/sics/cooja/plugins/ScriptRunner.java   |   12 +++++-
- 2 files changed, 42 insertions(+), 10 deletions(-)
+ 2 files changed, 41 insertions(+), 9 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java b/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
-index 5a6fd82..dce79df 100644
+index 2e867da..c118abf 100644
 --- a/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
 +++ b/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
 @@ -42,6 +42,7 @@ import javax.script.Invocable;
@@ -20,16 +20,7 @@ index 5a6fd82..dce79df 100644
  
  import org.apache.log4j.Logger;
  
-@@ -281,7 +282,7 @@ public class LogScriptEngine {
-         simulation.scheduleEvent(timeoutEvent, startTime + duration);
-       }
-     });
--
-+    
-     engine.eval(jsCode);
- 
-     /* Setup script control */
-@@ -330,14 +331,39 @@ public class LogScriptEngine {
+@@ -314,14 +315,39 @@ public class LogScriptEngine {
                logger.fatal("Script error:", e);
                System.exit(1);
              }
@@ -76,10 +67,10 @@ index 5a6fd82..dce79df 100644
          }
          /*logger.info("test script thread exits");*/
 diff --git a/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java b/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java
-index 0d9e4c6..65cdb39 100644
+index 82572bb..634b6a5 100644
 --- a/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java
 +++ b/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java
-@@ -343,11 +343,17 @@ public class ScriptRunner extends VisPlugin {
+@@ -356,11 +356,17 @@ public class ScriptRunner extends VisPlugin {
          logger.info("Test script activated");
  
        } catch (ScriptException e) {

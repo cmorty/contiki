@@ -77,7 +77,7 @@ index 4e7984f..b2f06c9 100644
  	public COOJAProject(File dir) {
  		try {
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index 532bcb2..30d968e 100644
+index 13291b5..db61cdc 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
 @@ -240,7 +240,8 @@ public class GUI extends Observable {

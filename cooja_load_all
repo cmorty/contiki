@@ -4,18 +4,18 @@ From: =?UTF-8?q?Moritz=20'Morty'=20Str=C3=BCbe?= <morty@gmx.net>
 
 Subject: [PATCH] Cooja: Load whole simulation before executing it in nogui mode
 ---
- tools/cooja/java/se/sics/cooja/GUI.java            |    4 ++--
+ tools/cooja/java/se/sics/cooja/GUI.java            |    6 +++---
  .../java/se/sics/cooja/plugins/ScriptRunner.java   |    2 --
- 2 files changed, 2 insertions(+), 4 deletions(-)
+ 2 files changed, 3 insertions(+), 5 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index 0915926..ac614a3 100644
+index 3d2227f..58bfd3f 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
-@@ -3052,13 +3052,13 @@ public class GUI extends Observable {
+@@ -3057,14 +3057,14 @@ public class GUI extends Observable {
+             logger.fatal("Error: " + e.getMessage(), e);
+             System.exit(1);
            }
-           plugin.updateScript(scriptFile);
-           plugin.setScriptActive(true);
 -          sim.setDelayTime(0);
 -          sim.startSimulation();
          } else {
@@ -23,19 +23,21 @@ index 0915926..ac614a3 100644
            System.exit(1);
          }
        }
+-
 +      sim.setDelayTime(0);
 +      sim.startSimulation();
-       
++      
      } else if (args.length > 0 && args[0].startsWith("-applet")) {
  
+       String tmpWebPath=null, tmpBuildPath=null, tmpEsbFirmware=null, tmpSkyFirmware=null;
 diff --git a/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java b/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java
-index 89fd6ca..0d9e4c6 100644
+index d67d863..82572bb 100644
 --- a/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java
 +++ b/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java
-@@ -617,8 +617,6 @@ public class ScriptRunner extends VisPlugin {
-     if (!GUI.isVisualized()) {
-       /* Automatically activate script */
-       setScriptActive(true);
+@@ -651,8 +651,6 @@ public class ScriptRunner extends VisPlugin {
+       } catch (Exception e) {
+         logger.fatal("Error: " + e.getMessage(), e);
+       }
 -      simulation.setDelayTime(0);
 -      simulation.startSimulation();
      }
