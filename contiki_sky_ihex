@@ -8,7 +8,7 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
  1 files changed, 3 insertions(+), 7 deletions(-)
 
 diff --git a/platform/sky/Makefile.common b/platform/sky/Makefile.common
-index 1cc357e..2fcb9db 100644
+index bdc22a1..d03ae46 100644
 --- a/platform/sky/Makefile.common
 +++ b/platform/sky/Makefile.common
 @@ -34,7 +34,6 @@ LDFLAGS += $(LDFLAGSNO) -Felf -yn

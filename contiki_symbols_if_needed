@@ -8,11 +8,11 @@ Only build symbols for Sky if they are needed.
  1 files changed, 2 insertions(+), 0 deletions(-)
 
 diff --git a/platform/sky/Makefile.common b/platform/sky/Makefile.common
-index 2fcb9db..a079bb3 100644
+index d03ae46..b571ba0 100644
 --- a/platform/sky/Makefile.common
 +++ b/platform/sky/Makefile.common
 @@ -24,7 +24,9 @@ CONTIKI_TARGET_SOURCEFILES += $(ARCH) $(UIPDRIVERS)
- MCU=msp430x1611
+ MCU=msp430f1611
  include $(CONTIKI)/cpu/msp430/Makefile.msp430
  
 +ifdef CORE
