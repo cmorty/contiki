@@ -8,7 +8,7 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
  1 files changed, 3 insertions(+), 7 deletions(-)
 
 diff --git a/platform/sky/Makefile.common b/platform/sky/Makefile.common
-index bdc22a1..d03ae46 100644
+index 302c794..8c8b875 100644
 --- a/platform/sky/Makefile.common
 +++ b/platform/sky/Makefile.common
 @@ -34,7 +34,6 @@ LDFLAGS += $(LDFLAGSNO) -Felf -yn
@@ -19,13 +19,13 @@ index bdc22a1..d03ae46 100644
  
  # Check if we are running under Windows
  ifeq ($(HOST_OS),Windows)
-@@ -97,20 +96,17 @@ sky-motes:
+@@ -118,20 +117,17 @@ sky-motes:
  
  ifdef MOTE
  %.upload: %.ihex
 -	cp $< $(IHEXFILE)
--	$(MAKE) sky-u.$(subst /,-,$(word $(MOTE), $(MOTES)))
-+	$(MAKE) IHEXFILE=$< sky-u.$(subst /,-,$(word $(MOTE), $(MOTES)))
+-	$(MAKE) sky-u.$(subst /,_,$(word $(MOTE), $(MOTES)))
++	$(MAKE) IHEXFILE=$< sky-u.$(subst /,_,$(word $(MOTE), $(MOTES)))
  else # MOTE
  %.upload: %.ihex
 -	cp $< $(IHEXFILE)
@@ -38,8 +38,8 @@ index bdc22a1..d03ae46 100644
  	@echo Uploading $(FILE)
 -	cp $(FILE) $(IHEXFILE)
  ifdef MOTE
--	$(MAKE) sky-u.$(subst /,-,$(word $(MOTE), $(MOTES)))
-+	$(MAKE) IHEXFILE=$(FILE) sky-u.$(subst /,-,$(word $(MOTE), $(MOTES)))
+-	$(MAKE) sky-u.$(subst /,_,$(word $(MOTE), $(MOTES)))
++	$(MAKE) IHEXFILE=$(FILE) sky-u.$(subst /,_,$(word $(MOTE), $(MOTES)))
  else # MOTE
  	$(MAKE) sky-reset sky-upload
  endif # MOTE

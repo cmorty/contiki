@@ -8,7 +8,7 @@ Only build symbols for Sky if they are needed.
  1 files changed, 2 insertions(+), 0 deletions(-)
 
 diff --git a/platform/sky/Makefile.common b/platform/sky/Makefile.common
-index d03ae46..b571ba0 100644
+index 8c8b875..1172770 100644
 --- a/platform/sky/Makefile.common
 +++ b/platform/sky/Makefile.common
 @@ -24,7 +24,9 @@ CONTIKI_TARGET_SOURCEFILES += $(ARCH) $(UIPDRIVERS)

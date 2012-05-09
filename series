@@ -1,4 +1,4 @@
-# This series applies on GIT commit 7a69571a2cb719a1ddd544121d0b924c2bd0764d
+# This series applies on GIT commit fca701714369a098b0f788109cae90a14c09951a
 cooja_load_all
 cooja_javascript_warnings
 cooja_motes_uninit
@@ -14,5 +14,4 @@ cooja_project_search
 contiki_symbols_if_needed
 contiki_rime_memfunc
 cooja_contiki_path_cmd_override
-cooja_fix_openjdk_logscript
 contiki_add-mesh_ready-to-mesh

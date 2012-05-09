@@ -9,7 +9,7 @@ Subject: [PATCH] Cooja: Give better Javascript warnings
  2 files changed, 41 insertions(+), 9 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java b/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
-index 2e867da..c118abf 100644
+index 374c8fc..64a4cd8 100644
 --- a/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
 +++ b/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
 @@ -42,6 +42,7 @@ import javax.script.Invocable;
@@ -20,7 +20,7 @@ index 2e867da..c118abf 100644
  
  import org.apache.log4j.Logger;
  
-@@ -314,14 +315,39 @@ public class LogScriptEngine {
+@@ -312,14 +313,39 @@ public class LogScriptEngine {
                logger.fatal("Script error:", e);
                System.exit(1);
              }

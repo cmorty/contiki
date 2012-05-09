@@ -4,30 +4,29 @@ From: =?UTF-8?q?Moritz=20'Morty'=20Str=C3=BCbe?= <morty@gmx.net>
 
 Subject: Support MOTEIDS for flashing, etc
 ---
- platform/sky/Makefile.common |   13 ++++++++++---
- 1 files changed, 10 insertions(+), 3 deletions(-)
+ platform/sky/Makefile.common |   12 +++++++++---
+ 1 files changed, 9 insertions(+), 3 deletions(-)
 
 diff --git a/platform/sky/Makefile.common b/platform/sky/Makefile.common
-index 492a737..bdc22a1 100644
+index 53d6808..302c794 100644
 --- a/platform/sky/Makefile.common
 +++ b/platform/sky/Makefile.common
-@@ -75,9 +75,16 @@ ifndef MOTELIST
-     BSL = $(CONTIKI)/tools/sky/msp430-bsl-linux --telosb
-     BSL_FILETYPE = -I
+@@ -95,9 +95,15 @@ else
+       BSL = $(CONTIKI)/tools/sky/msp430-bsl-linux --telosb
+       BSL_FILETYPE = -I
+     endif
+-    MOTES = $(shell $(MOTELIST) 2>&- | grep USB | \
+-       cut -f 4 -d \  | \
+-       perl -ne 'print $$1 . " " if(m-(/dev/[\w+\.\-]+)-);')
++    ifdef MOTEIDS
++  	  MOTES = $(foreach MOTEID, $(MOTEIDS), $(shell $(MOTELIST)  2>&- | grep $(MOTEID) | \
++          cut -f 4 -d \  | \
++          perl -ne 'print $$1 . " " if(m-(/dev/[\w+\.\-]+)-);') 
++    else
++      MOTES = $(shell $(MOTELIST) 2>&- | grep USB | \
++         cut -f 4 -d \  | \
++         perl -ne 'print $$1 . " " if(m-(/dev/[\w+\.\-]+)-);')
++    endif
+     CMOTES=$(MOTES)
    endif
--  MOTES = $(shell $(MOTELIST) 2>&- | grep USB | \
--     cut -f 4 -d \  | \
--     perl -ne 'print $$1 . " " if(m-(/dev/\w+)-);')
-+  ifdef MOTEIDS
-+  	MOTES = $(foreach MOTEID, $(MOTEIDS), $(shell $(MOTELIST)  2>&- | grep $(MOTEID) | \
-+       cut -f 4 -d \  | \
-+       perl -ne 'print $$1 . " " if(m-(/dev/\w+)-);'))
-+  
-+  else
-+    MOTES = $(shell $(MOTELIST) 2>&- | grep USB | \
-+       cut -f 4 -d \  | \
-+       perl -ne 'print $$1 . " " if(m-(/dev/\w+)-);')
-+  endif
-   CMOTES=$(MOTES)
  endif
- 
