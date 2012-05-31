@@ -9,7 +9,7 @@ Subject: [PATCH] Cooja: Give better Javascript warnings
  2 files changed, 41 insertions(+), 9 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java b/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
-index 374c8fc..64a4cd8 100644
+index 5f96c03..9d7a557 100644
 --- a/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
 +++ b/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
 @@ -42,6 +42,7 @@ import javax.script.Invocable;
@@ -67,10 +67,10 @@ index 374c8fc..64a4cd8 100644
          }
          /*logger.info("test script thread exits");*/
 diff --git a/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java b/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java
-index 941ed1a..abfd928 100644
+index d57a225..ad974a2 100644
 --- a/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java
 +++ b/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java
-@@ -356,11 +356,17 @@ public class ScriptRunner extends VisPlugin {
+@@ -360,11 +360,17 @@ public class ScriptRunner extends VisPlugin {
          logger.info("Test script activated");
  
        } catch (ScriptException e) {

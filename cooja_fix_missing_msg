@@ -8,7 +8,7 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
  1 files changed, 1 insertions(+), 0 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java b/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
-index 64a4cd8..fbb4971 100644
+index 9d7a557..80210ec 100644
 --- a/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
 +++ b/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
 @@ -366,6 +366,7 @@ public class LogScriptEngine {

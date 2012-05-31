@@ -9,10 +9,10 @@ Subject: [PATCH] Cooja: Load whole simulation before executing it in nogui mode
  2 files changed, 3 insertions(+), 5 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index c35492f..63af77a 100644
+index 6112ea4..af56f8d 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
-@@ -3071,14 +3071,14 @@ public class GUI extends Observable {
+@@ -3158,14 +3158,14 @@ public class GUI extends Observable {
              logger.fatal("Error: " + e.getMessage(), e);
              System.exit(1);
            }
@@ -31,10 +31,10 @@ index c35492f..63af77a 100644
  
        String tmpWebPath=null, tmpBuildPath=null, tmpEsbFirmware=null, tmpSkyFirmware=null;
 diff --git a/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java b/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java
-index e1729e8..941ed1a 100644
+index 06fdf6c..d57a225 100644
 --- a/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java
 +++ b/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java
-@@ -651,8 +651,6 @@ public class ScriptRunner extends VisPlugin {
+@@ -655,8 +655,6 @@ public class ScriptRunner extends VisPlugin {
        } catch (Exception e) {
          logger.fatal("Error: " + e.getMessage(), e);
        }

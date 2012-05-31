@@ -8,12 +8,12 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
  1 files changed, 34 insertions(+), 1 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/Simulation.java b/tools/cooja/java/se/sics/cooja/Simulation.java
-index c1e8962..d2e516c 100644
+index c505623..79eb3e0 100644
 --- a/tools/cooja/java/se/sics/cooja/Simulation.java
 +++ b/tools/cooja/java/se/sics/cooja/Simulation.java
-@@ -58,7 +58,8 @@ public class Simulation extends Observable implements Runnable {
+@@ -60,7 +60,8 @@ public class Simulation extends Observable implements Runnable {
    /*private static long EVENT_COUNTER = 0;*/
-   
+ 
    private Vector<Mote> motes = new Vector<Mote>();
 -
 +  private Vector<Mote> motesUninit = new Vector<Mote>();
@@ -21,15 +21,15 @@ index c1e8962..d2e516c 100644
    private Vector<MoteType> moteTypes = new Vector<MoteType>();
  
    private int delayTime=0, delayPeriod=1;
-@@ -789,6 +790,7 @@ public class Simulation extends Observable implements Runnable {
+@@ -810,6 +811,7 @@ public class Simulation extends Observable implements Runnable {
          }
-         
+ 
          motes.add(mote);
 +        motesUninit.remove(mote);
          currentRadioMedium.registerMote(mote, Simulation.this);
  
          /* Notify mote interfaces that node was added */
-@@ -808,6 +810,9 @@ public class Simulation extends Observable implements Runnable {
+@@ -829,6 +831,9 @@ public class Simulation extends Observable implements Runnable {
        /* Add mote from simulation thread */
        invokeSimulationThread(addMote);
      }
@@ -39,7 +39,7 @@ index c1e8962..d2e516c 100644
    }
  
    /**
-@@ -839,6 +844,24 @@ public class Simulation extends Observable implements Runnable {
+@@ -860,6 +865,24 @@ public class Simulation extends Observable implements Runnable {
    }
  
    /**
@@ -64,7 +64,7 @@ index c1e8962..d2e516c 100644
     * Returns number of motes in this simulation.
     *
     * @return Number of motes
-@@ -859,6 +882,16 @@ public class Simulation extends Observable implements Runnable {
+@@ -880,6 +903,16 @@ public class Simulation extends Observable implements Runnable {
    }
  
    /**
