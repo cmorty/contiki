@@ -1,6 +1,6 @@
 From 8bb4a8853488289e7366f71327f8fbb84e6399f6 Mon Sep 17 00:00:00 2001
 
-From: =?UTF-8?q?Moritz=20'Morty'=20Str=C3=BCbe?= <morty@gmx.net>
+From: Moritz 'Morty' Strübe <morty@gmx.net>
 
 Subject: DRGM: Reordered interference checks: e.g. do not interfere if on different channel
 ---
