@@ -1,0 +1,92 @@
+From 947f57f4f39b14a4437889ef014b94ce3e53ec49 Mon Sep 17 00:00:00 2001
+
+From: =?UTF-8?q?Moritz=20'Morty'=20Str=C3=BCbe?= <morty@gmx.net>
+
+Subject: Add LQI-Support to DGRM
+---
+ .../cooja/mspmote/interfaces/Msp802154Radio.java   |   14 ++++++++++++++
+ .../cooja/java/se/sics/cooja/interfaces/Radio.java |   19 +++++++++++++++++++
+ .../cooja/radiomediums/DirectedGraphMedium.java    |    8 +++++++-
+ 3 files changed, 40 insertions(+), 1 deletions(-)
+
+diff --git a/tools/cooja/apps/mspsim/src/se/sics/cooja/mspmote/interfaces/Msp802154Radio.java b/tools/cooja/apps/mspsim/src/se/sics/cooja/mspmote/interfaces/Msp802154Radio.java
+index e2ded99..6ff7f2c 100644
+--- a/tools/cooja/apps/mspsim/src/se/sics/cooja/mspmote/interfaces/Msp802154Radio.java
++++ b/tools/cooja/apps/mspsim/src/se/sics/cooja/mspmote/interfaces/Msp802154Radio.java
+@@ -378,7 +378,21 @@ public class Msp802154Radio extends Radio implements CustomDataRadio {
+     }
+     rssiLastCounter = 8;
+   }
++  
++  
++  /* This will set the CORR-value of the CC2420
++   * 
++   * @see se.sics.cooja.interfaces.Radio#setLQI(int)
++   */
++  public void setLQI(int lqi){
++	  radio.setLQI(lqi);
++  }
+ 
++  public int getLQI(){
++	  return radio.getLQI();
++  }
++  
++  
+   public Mote getMote() {
+     return mote;
+   }
+diff --git a/tools/cooja/java/se/sics/cooja/interfaces/Radio.java b/tools/cooja/java/se/sics/cooja/interfaces/Radio.java
+index 0800774..17ea715 100644
+--- a/tools/cooja/java/se/sics/cooja/interfaces/Radio.java
++++ b/tools/cooja/java/se/sics/cooja/interfaces/Radio.java
+@@ -169,6 +169,25 @@ public abstract class Radio extends MoteInterface {
+    * @return Maximum output power indicator
+    */
+   public abstract int getOutputPowerIndicatorMax();
++  
++  /** 
++   * Returns the current LQI-value. This might differ from platform to platform 
++   * @return Current LQI value.
++   *  
++   * 
++   */
++  public int getLQI() throws UnsupportedOperationException {
++	  throw new UnsupportedOperationException();
++  }
++
++  /**
++   * Sets the LQI. This in not supported by all platforms. Also results may differ
++   * from platform to platform. 
++   *
++   * @param lqi The current LQI
++   */
++  public void setLQI(int lqi){
++  }
+ 
+   /**
+    * @return Current surrounding signal strength
+diff --git a/tools/cooja/java/se/sics/cooja/radiomediums/DirectedGraphMedium.java b/tools/cooja/java/se/sics/cooja/radiomediums/DirectedGraphMedium.java
+index e158758..da9bf8d 100644
+--- a/tools/cooja/java/se/sics/cooja/radiomediums/DirectedGraphMedium.java
++++ b/tools/cooja/java/se/sics/cooja/radiomediums/DirectedGraphMedium.java
+@@ -173,13 +173,19 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
+         conn.getSource().setCurrentSignalStrength(SS_STRONG);
+       }
+       //Maximum reception signal of all possible radios received
+-      DGRMDestinationRadio dstRadios[] =  edgesTable.get(conn.getSource());
++      DGRMDestinationRadio dstRadios[] =  getPotentialDestinations(conn.getSource());
+       if (dstRadios == null) continue; 
+       for (DGRMDestinationRadio dstRadio : dstRadios) {
+         if (dstRadio.radio.getCurrentSignalStrength() < dstRadio.signal) {
+           dstRadio.radio.setCurrentSignalStrength(dstRadio.signal);
+         }
++        /* We can set this without further checks, as it will only be read
++         * if a packet is actually received. In that case it is set to the
++         * correct value */
++        dstRadio.radio.setLQI(dstRadio.lqi);
+       }
++    
++      
+     } 
+   }
+ 

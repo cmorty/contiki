@@ -14,3 +14,8 @@ contiki_symbols_if_needed
 contiki_rime_memfunc
 cooja_contiki_path_cmd_override
 contiki_add-mesh_ready-to-mesh
+cooja_dgrm_fix_rssi
+cooja_AbstractRadioMedium_indention
+cooja_AbstractRadioMedium_update_refactor
+cooja_dgrm_cleanup_reception_checks
+cooja_dgrm_add_lqi
