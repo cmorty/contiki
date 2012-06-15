@@ -8,7 +8,7 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
  1 files changed, 34 insertions(+), 1 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/Simulation.java b/tools/cooja/java/se/sics/cooja/Simulation.java
-index c505623..79eb3e0 100644
+index 4b21878..6f2d184 100644
 --- a/tools/cooja/java/se/sics/cooja/Simulation.java
 +++ b/tools/cooja/java/se/sics/cooja/Simulation.java
 @@ -60,7 +60,8 @@ public class Simulation extends Observable implements Runnable {
@@ -20,8 +20,8 @@ index c505623..79eb3e0 100644
 +  
    private Vector<MoteType> moteTypes = new Vector<MoteType>();
  
-   private int delayTime=0, delayPeriod=1;
-@@ -810,6 +811,7 @@ public class Simulation extends Observable implements Runnable {
+   /* If true, run simulation at full speed */
+@@ -820,6 +821,7 @@ public class Simulation extends Observable implements Runnable {
          }
  
          motes.add(mote);
@@ -29,7 +29,7 @@ index c505623..79eb3e0 100644
          currentRadioMedium.registerMote(mote, Simulation.this);
  
          /* Notify mote interfaces that node was added */
-@@ -829,6 +831,9 @@ public class Simulation extends Observable implements Runnable {
+@@ -839,6 +841,9 @@ public class Simulation extends Observable implements Runnable {
        /* Add mote from simulation thread */
        invokeSimulationThread(addMote);
      }
@@ -39,7 +39,7 @@ index c505623..79eb3e0 100644
    }
  
    /**
-@@ -860,6 +865,24 @@ public class Simulation extends Observable implements Runnable {
+@@ -870,6 +875,24 @@ public class Simulation extends Observable implements Runnable {
    }
  
    /**
@@ -64,7 +64,7 @@ index c505623..79eb3e0 100644
     * Returns number of motes in this simulation.
     *
     * @return Number of motes
-@@ -880,6 +903,16 @@ public class Simulation extends Observable implements Runnable {
+@@ -890,6 +913,16 @@ public class Simulation extends Observable implements Runnable {
    }
  
    /**

@@ -67,10 +67,10 @@ index 5f96c03..9d7a557 100644
          }
          /*logger.info("test script thread exits");*/
 diff --git a/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java b/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java
-index d57a225..ad974a2 100644
+index fd3084e..3688100 100644
 --- a/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java
 +++ b/tools/cooja/java/se/sics/cooja/plugins/ScriptRunner.java
-@@ -360,11 +360,17 @@ public class ScriptRunner extends VisPlugin {
+@@ -378,11 +378,17 @@ public class ScriptRunner extends VisPlugin {
          logger.info("Test script activated");
  
        } catch (ScriptException e) {

@@ -77,10 +77,10 @@ index 4e7984f..b2f06c9 100644
  	public COOJAProject(File dir) {
  		try {
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index 0c31abb..1363d4f 100644
+index b6def82..5f42c51 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
-@@ -240,7 +240,8 @@ public class GUI extends Observable {
+@@ -248,7 +248,8 @@ public class GUI extends Observable {
    public static Properties currentExternalToolsSettings;
  
    private static final String externalToolsSettingNames[] = new String[] {
@@ -90,7 +90,7 @@ index 0c31abb..1363d4f 100644
  
      "PATH_MAKE",
      "PATH_SHELL",
-@@ -414,6 +415,20 @@ public class GUI extends Observable {
+@@ -427,6 +428,20 @@ public class GUI extends Observable {
          currentProjects.add(new COOJAProject(projectDir));
        }
      }

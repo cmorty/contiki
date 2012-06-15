@@ -9,7 +9,7 @@ Subject: DGRM: Change DirectedGraphMedium over to DGRMDestinationRadio and fix R
  2 files changed, 28 insertions(+), 34 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/radiomediums/DirectedGraphMedium.java b/tools/cooja/java/se/sics/cooja/radiomediums/DirectedGraphMedium.java
-index f6ba39c..55a8044 100644
+index 78d48e5..0ff5bbc 100644
 --- a/tools/cooja/java/se/sics/cooja/radiomediums/DirectedGraphMedium.java
 +++ b/tools/cooja/java/se/sics/cooja/radiomediums/DirectedGraphMedium.java
 @@ -72,7 +72,7 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
@@ -165,7 +165,7 @@ index f6ba39c..55a8044 100644
        this.superDest = dest;
      }
 diff --git a/tools/cooja/java/se/sics/cooja/radiomediums/UDGM.java b/tools/cooja/java/se/sics/cooja/radiomediums/UDGM.java
-index c87fce3..24ecc46 100644
+index 82865c6..0e035ab 100644
 --- a/tools/cooja/java/se/sics/cooja/radiomediums/UDGM.java
 +++ b/tools/cooja/java/se/sics/cooja/radiomediums/UDGM.java
 @@ -113,7 +113,7 @@ public class UDGM extends AbstractRadioMedium {

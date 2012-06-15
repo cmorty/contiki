@@ -1,4 +1,4 @@
-# This series applies on GIT commit bb320f66c8b9909b43590592f5449c3a645de565
+# This series applies on GIT commit ec1ee5d47b80c148719566637dcd42a621de7c16
 cooja_load_all
 cooja_javascript_warnings
 cooja_motes_uninit

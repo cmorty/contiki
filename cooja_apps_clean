@@ -6,11 +6,11 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
 ---
  .../cooja/apps/.backyard/native_gateway/build.xml  |   48 +
  .../apps/.backyard/native_gateway/cooja.config     |    2 
- .../se/sics/cooja/plugins/NativeIPGateway.java     | 1021 ++++++++++++++++++++
+ .../se/sics/cooja/plugins/NativeIPGateway.java     | 1024 ++++++++++++++++++++
  tools/cooja/apps/native_gateway/build.xml          |   48 -
  tools/cooja/apps/native_gateway/cooja.config       |    2 
- .../se/sics/cooja/plugins/NativeIPGateway.java     | 1021 --------------------
- 6 files changed, 1071 insertions(+), 1071 deletions(-)
+ .../se/sics/cooja/plugins/NativeIPGateway.java     | 1024 --------------------
+ 6 files changed, 1074 insertions(+), 1074 deletions(-)
  create mode 100644 tools/cooja/apps/.backyard/native_gateway/build.xml
  create mode 100644 tools/cooja/apps/.backyard/native_gateway/cooja.config
  create mode 100644 tools/cooja/apps/.backyard/native_gateway/java/se/sics/cooja/plugins/NativeIPGateway.java
@@ -82,10 +82,10 @@ index 0000000..9bcd6c6
 +se.sics.cooja.GUI.JARFILES = + native_gateway.jar
 diff --git a/tools/cooja/apps/.backyard/native_gateway/java/se/sics/cooja/plugins/NativeIPGateway.java b/tools/cooja/apps/.backyard/native_gateway/java/se/sics/cooja/plugins/NativeIPGateway.java
 new file mode 100644
-index 0000000..9a28a90
+index 0000000..83f9e34
 --- /dev/null
 +++ b/tools/cooja/apps/.backyard/native_gateway/java/se/sics/cooja/plugins/NativeIPGateway.java
-@@ -0,0 +1,1021 @@
+@@ -0,0 +1,1024 @@
 +/*
 + * Copyright (c) 2008, Swedish Institute of Computer Science.
 + * All rights reserved.
@@ -157,18 +157,21 @@ index 0000000..9a28a90
 +
 +import se.sics.cooja.ClassDescription;
 +import se.sics.cooja.GUI;
++import se.sics.cooja.GUI.RunnableInEDT;
 +import se.sics.cooja.Mote;
 +import se.sics.cooja.MotePlugin;
 +import se.sics.cooja.PluginType;
 +import se.sics.cooja.Simulation;
++import se.sics.cooja.SupportedArguments;
 +import se.sics.cooja.VisPlugin;
-+import se.sics.cooja.GUI.RunnableInEDT;
 +import se.sics.cooja.dialogs.CompileContiki;
 +import se.sics.cooja.dialogs.MessageList;
++import se.sics.cooja.interfaces.IPAddress;
 +import se.sics.cooja.interfaces.SerialPort;
 +
 +@ClassDescription("Open Native IP Gateway")
 +@PluginType(PluginType.MOTE_PLUGIN)
++@SupportedArguments(moteInterfaces = {IPAddress.class})
 +public class NativeIPGateway extends VisPlugin implements MotePlugin {
 +  private static final long serialVersionUID = 1L;
 +  private static Logger logger = Logger.getLogger(NativeIPGateway.class);
@@ -326,7 +329,7 @@ index 0000000..9a28a90
 +        }
 +
 +        /* Detect selected network interface */
-+        NetworkInterfaceW intf = 
++        NetworkInterfaceW intf =
 +          (NetworkInterfaceW) ((JComboBox)e.getSource()).getSelectedItem();
 +        if (networkInterface == intf) {
 +          /* Already selected */
@@ -634,7 +637,7 @@ index 0000000..9a28a90
 +    final JDialog progressDialog;
 +    if (GUI.isVisualized()) {
 +      progressDialog = new JDialog(
-+          (Window)GUI.getTopParentContainer(), 
++          (Window)GUI.getTopParentContainer(),
 +          "Starting Native IP Gateway plugin"
 +      );
 +    } else {
@@ -652,7 +655,7 @@ index 0000000..9a28a90
 +          progressDialog.getContentPane().add(BorderLayout.NORTH, progressBar);
 +          progressDialog.getContentPane().add(BorderLayout.CENTER, new JScrollPane(output));
 +          progressDialog.setSize(350, 150);
-+          progressDialog.setLocationRelativeTo((Window)GUI.getTopParentContainer());
++          progressDialog.setLocationRelativeTo(GUI.getTopParentContainer());
 +          progressDialog.setVisible(true);
 +          GUI.setProgressMessage("Compiling hello-world.minimal-net (Native IP Gateway)");
 +          return true;
@@ -701,7 +704,7 @@ index 0000000..9a28a90
 +        }
 +      });
 +      Runtime.getRuntime().addShutdownHook(shutdownHook);
-+      
++
 +      /* Waiting some time - otherwise pcap may not discover the new interface */
 +      Thread.sleep(250);
 +
@@ -710,7 +713,7 @@ index 0000000..9a28a90
 +      logger.fatal("Error when creating tap0: " + e.getMessage());
 +      logger.fatal("Try using an already existing network interface");
 +    }
-+    
++
 +    /* Hide progress bar */
 +    if (GUI.isVisualized()) {
 +      new RunnableInEDT<Boolean>() {
@@ -1095,7 +1098,7 @@ index 0000000..9a28a90
 +    }
 +
 +    deleteTunInterface();
-+    
++
 +    if (shutdownHook != null) {
 +      Runtime.getRuntime().removeShutdownHook(shutdownHook);
 +      shutdownHook = null;
@@ -1171,10 +1174,10 @@ index 9bcd6c6..0000000
 -se.sics.cooja.GUI.JARFILES = + native_gateway.jar
 diff --git a/tools/cooja/apps/native_gateway/java/se/sics/cooja/plugins/NativeIPGateway.java b/tools/cooja/apps/native_gateway/java/se/sics/cooja/plugins/NativeIPGateway.java
 deleted file mode 100644
-index 9a28a90..0000000
+index 83f9e34..0000000
 --- a/tools/cooja/apps/native_gateway/java/se/sics/cooja/plugins/NativeIPGateway.java
 +++ /dev/null
-@@ -1,1021 +0,0 @@
+@@ -1,1024 +0,0 @@
 -/*
 - * Copyright (c) 2008, Swedish Institute of Computer Science.
 - * All rights reserved.
@@ -1246,18 +1249,21 @@ index 9a28a90..0000000
 -
 -import se.sics.cooja.ClassDescription;
 -import se.sics.cooja.GUI;
+-import se.sics.cooja.GUI.RunnableInEDT;
 -import se.sics.cooja.Mote;
 -import se.sics.cooja.MotePlugin;
 -import se.sics.cooja.PluginType;
 -import se.sics.cooja.Simulation;
+-import se.sics.cooja.SupportedArguments;
 -import se.sics.cooja.VisPlugin;
--import se.sics.cooja.GUI.RunnableInEDT;
 -import se.sics.cooja.dialogs.CompileContiki;
 -import se.sics.cooja.dialogs.MessageList;
+-import se.sics.cooja.interfaces.IPAddress;
 -import se.sics.cooja.interfaces.SerialPort;
 -
 -@ClassDescription("Open Native IP Gateway")
 -@PluginType(PluginType.MOTE_PLUGIN)
+-@SupportedArguments(moteInterfaces = {IPAddress.class})
 -public class NativeIPGateway extends VisPlugin implements MotePlugin {
 -  private static final long serialVersionUID = 1L;
 -  private static Logger logger = Logger.getLogger(NativeIPGateway.class);
@@ -1415,7 +1421,7 @@ index 9a28a90..0000000
 -        }
 -
 -        /* Detect selected network interface */
--        NetworkInterfaceW intf = 
+-        NetworkInterfaceW intf =
 -          (NetworkInterfaceW) ((JComboBox)e.getSource()).getSelectedItem();
 -        if (networkInterface == intf) {
 -          /* Already selected */
@@ -1723,7 +1729,7 @@ index 9a28a90..0000000
 -    final JDialog progressDialog;
 -    if (GUI.isVisualized()) {
 -      progressDialog = new JDialog(
--          (Window)GUI.getTopParentContainer(), 
+-          (Window)GUI.getTopParentContainer(),
 -          "Starting Native IP Gateway plugin"
 -      );
 -    } else {
@@ -1741,7 +1747,7 @@ index 9a28a90..0000000
 -          progressDialog.getContentPane().add(BorderLayout.NORTH, progressBar);
 -          progressDialog.getContentPane().add(BorderLayout.CENTER, new JScrollPane(output));
 -          progressDialog.setSize(350, 150);
--          progressDialog.setLocationRelativeTo((Window)GUI.getTopParentContainer());
+-          progressDialog.setLocationRelativeTo(GUI.getTopParentContainer());
 -          progressDialog.setVisible(true);
 -          GUI.setProgressMessage("Compiling hello-world.minimal-net (Native IP Gateway)");
 -          return true;
@@ -1790,7 +1796,7 @@ index 9a28a90..0000000
 -        }
 -      });
 -      Runtime.getRuntime().addShutdownHook(shutdownHook);
--      
+-
 -      /* Waiting some time - otherwise pcap may not discover the new interface */
 -      Thread.sleep(250);
 -
@@ -1799,7 +1805,7 @@ index 9a28a90..0000000
 -      logger.fatal("Error when creating tap0: " + e.getMessage());
 -      logger.fatal("Try using an already existing network interface");
 -    }
--    
+-
 -    /* Hide progress bar */
 -    if (GUI.isVisualized()) {
 -      new RunnableInEDT<Boolean>() {
@@ -2184,7 +2190,7 @@ index 9a28a90..0000000
 -    }
 -
 -    deleteTunInterface();
--    
+-
 -    if (shutdownHook != null) {
 -      Runtime.getRuntime().removeShutdownHook(shutdownHook);
 -      shutdownHook = null;

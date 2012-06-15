@@ -8,7 +8,7 @@ Subject: DRGM: Reordered interference checks: e.g. do not interfere if on differ
  1 files changed, 44 insertions(+), 56 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/radiomediums/DirectedGraphMedium.java b/tools/cooja/java/se/sics/cooja/radiomediums/DirectedGraphMedium.java
-index 55a8044..e158758 100644
+index 0ff5bbc..d130abf 100644
 --- a/tools/cooja/java/se/sics/cooja/radiomediums/DirectedGraphMedium.java
 +++ b/tools/cooja/java/se/sics/cooja/radiomediums/DirectedGraphMedium.java
 @@ -35,6 +35,7 @@ import java.util.ArrayList;
@@ -56,7 +56,7 @@ index 55a8044..e158758 100644
 -        continue;
 -      }
  
-       if (!dest.radio.isReceiverOn()) {
+       if (!dest.radio.isRadioOn()) {
          /* Fail: radio is off */
 @@ -273,53 +265,45 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
          newConn.addInterfered(dest.radio);
