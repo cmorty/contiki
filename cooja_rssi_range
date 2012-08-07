@@ -1,0 +1,27 @@
+From 85de9eea2897b201c09c5b1aaa5b5739176cb772 Mon Sep 17 00:00:00 2001
+
+From: =?UTF-8?q?Moritz=20'Morty'=20Str=C3=BCbe?= <morty@gmx.net>
+
+Subject: Fix problems with out-of-range RSSI-Values.
+ Certain values cause the DGRMVisualizerSkin to calculate color values
+ that are out of range.
+---
+ .../cooja/plugins/skins/DGRMVisualizerSkin.java    |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+
+diff --git a/tools/cooja/java/se/sics/cooja/plugins/skins/DGRMVisualizerSkin.java b/tools/cooja/java/se/sics/cooja/plugins/skins/DGRMVisualizerSkin.java
+index 012d46f..5c30aa7 100644
+--- a/tools/cooja/java/se/sics/cooja/plugins/skins/DGRMVisualizerSkin.java
++++ b/tools/cooja/java/se/sics/cooja/plugins/skins/DGRMVisualizerSkin.java
+@@ -122,7 +122,11 @@ public class DGRMVisualizerSkin implements VisualizerSkin {
+ 			double pos_rssi = rssi + 100;
+ 			int lqi = ((DGRMDestinationRadio)r).lqi;
+ 			float red = (float)(1 - prob*pos_rssi/90*lqi/100);
++			if(red > 1) red = 1;
++			if(red < 0) red = 0;
+ 			float green = (float)(prob*pos_rssi/90*lqi/100);
++			if(green > 1) green = 1;
++			if(green < 0) green = 0;
+ 			if (prob == 0.0d) {
+ 				continue;
+ 			}

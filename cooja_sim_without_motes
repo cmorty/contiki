@@ -1,0 +1,26 @@
+From 57c813566bec048a93f9f4d65c0e188e7f143c4a Mon Sep 17 00:00:00 2001
+
+From: =?UTF-8?q?Moritz=20'Morty'=20Str=C3=BCbe?= <morty@gmx.net>
+
+Subject: Allow running the simulation without motes.
+ Normally it is not possible to start a simulation without motes. While
+ this nomally makes sense, it might be, that motes are added at a later
+ point in time by plugins.
+---
+ tools/cooja/java/se/sics/cooja/Simulation.java |    3 ---
+ 1 files changed, 0 insertions(+), 3 deletions(-)
+
+diff --git a/tools/cooja/java/se/sics/cooja/Simulation.java b/tools/cooja/java/se/sics/cooja/Simulation.java
+index 6f2d184..cbf6eea 100644
+--- a/tools/cooja/java/se/sics/cooja/Simulation.java
++++ b/tools/cooja/java/se/sics/cooja/Simulation.java
+@@ -1105,9 +1105,6 @@ public class Simulation extends Observable implements Runnable {
+    * @return True if simulation is runnable
+    */
+   public boolean isRunnable() {
+-    if (motes.isEmpty()) {
+-      return false;
+-    }
+     return isRunning || hasPollRequests || eventQueue.peekFirst() != null;
+   }
+ 
