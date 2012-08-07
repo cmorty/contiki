@@ -1,9 +1,8 @@
-From 57c813566bec048a93f9f4d65c0e188e7f143c4a Mon Sep 17 00:00:00 2001
+Allow running the simulation without motes.
 
-From: =?UTF-8?q?Moritz=20'Morty'=20Str=C3=BCbe?= <morty@gmx.net>
+From: Moritz 'Morty' Strübe <morty@gmx.net>
 
-Subject: Allow running the simulation without motes.
- Normally it is not possible to start a simulation without motes. While
+Normally it is not possible to start a simulation without motes. While
  this nomally makes sense, it might be, that motes are added at a later
  point in time by plugins.
 ---

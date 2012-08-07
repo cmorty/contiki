@@ -1,9 +1,8 @@
-From 7d8113611af987d42e7510ec1de1fa152b8eeb61 Mon Sep 17 00:00:00 2001
+make GUI.updateGUIComponentState() public
 
-From: =?UTF-8?q?Moritz=20'Morty'=20Str=C3=BCbe?= <morty@gmx.net>
+From: Moritz 'Morty' Strübe <morty@gmx.net>
 
-Subject: [PATCH] make GUI.updateGUIComponentState() public
- This is actually a workaround, that is needed to allow plugins to add
+This is actually a workaround, that is needed to allow plugins to add
  motes and update the display. Probably this should be fixed differently.
 ---
  tools/cooja/java/se/sics/cooja/GUI.java |    2 +-

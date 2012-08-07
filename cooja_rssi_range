@@ -1,9 +1,8 @@
-From 85de9eea2897b201c09c5b1aaa5b5739176cb772 Mon Sep 17 00:00:00 2001
+Fix problems with out-of-range RSSI-Values.
 
-From: =?UTF-8?q?Moritz=20'Morty'=20Str=C3=BCbe?= <morty@gmx.net>
+From: Moritz 'Morty' Strübe <morty@gmx.net>
 
-Subject: Fix problems with out-of-range RSSI-Values.
- Certain values cause the DGRMVisualizerSkin to calculate color values
+Certain values cause the DGRMVisualizerSkin to calculate color values
  that are out of range.
 ---
  .../cooja/plugins/skins/DGRMVisualizerSkin.java    |    4 ++++

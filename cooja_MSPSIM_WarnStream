@@ -1,9 +1,8 @@
-From bb4652882af68e9a73a3cc4b41d13df5731fbddb Mon Sep 17 00:00:00 2001
+Add Support for MSPSim-WarnStream
 
-From: =?UTF-8?q?Moritz=20'Morty'=20Str=C3=BCbe?= <morty@gmx.net>
+From: Moritz 'Morty' Strübe <morty@gmx.net>
 
-Subject: Add Support for MSPSim-WarnStream
- There is a patch to add a WarnStream to MSPSim. This allows to integrate
+There is a patch to add a WarnStream to MSPSim. This allows to integrate
  MSPSim warnings into Log4J and also add information about the mote in
  question.
 ---

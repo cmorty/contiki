@@ -1,9 +1,8 @@
-From 11e8ede17321b1b249c94124122097ebb68a0ae0 Mon Sep 17 00:00:00 2001
+Improve GUI-Performance
 
-From: =?UTF-8?q?Moritz=20'Morty'=20Str=C3=BCbe?= <morty@gmx.net>
+From: Moritz 'Morty' Strübe <morty@gmx.net>
 
-Subject: Improve GUI-Performance
- This improves the performace of Nimbus significantly. Unfortunately it
+This improves the performace of Nimbus significantly. Unfortunately it
  also adds compile warnings that can not be suppressed. This will be
  fixed in Java 7.
 ---
