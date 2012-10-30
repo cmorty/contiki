@@ -10,10 +10,10 @@ There is a patch to add a WarnStream to MSPSim. This allows to integrate
  1 files changed, 42 insertions(+), 1 deletions(-)
 
 diff --git a/tools/cooja/apps/mspsim/src/se/sics/cooja/mspmote/MspMote.java b/tools/cooja/apps/mspsim/src/se/sics/cooja/mspmote/MspMote.java
-index 497132c..6e0607d 100644
+index 7d6286e..2af8f55 100644
 --- a/tools/cooja/apps/mspsim/src/se/sics/cooja/mspmote/MspMote.java
 +++ b/tools/cooja/apps/mspsim/src/se/sics/cooja/mspmote/MspMote.java
-@@ -33,7 +33,9 @@ package se.sics.cooja.mspmote;
+@@ -32,7 +32,9 @@ package se.sics.cooja.mspmote;
  
  import java.io.File;
  import java.io.IOException;
@@ -23,7 +23,7 @@ index 497132c..6e0607d 100644
  import java.util.ArrayList;
  import java.util.Collection;
  import java.util.Hashtable;
-@@ -64,6 +66,8 @@ import se.sics.mspsim.cli.CommandHandler;
+@@ -63,6 +65,8 @@ import se.sics.mspsim.cli.CommandHandler;
  import se.sics.mspsim.cli.LineListener;
  import se.sics.mspsim.cli.LineOutputStream;
  import se.sics.mspsim.core.EmulationException;
@@ -32,7 +32,7 @@ index 497132c..6e0607d 100644
  import se.sics.mspsim.core.MSP430;
  import se.sics.mspsim.platform.GenericNode;
  import se.sics.mspsim.ui.JFrameWindowManager;
-@@ -108,12 +112,49 @@ public abstract class MspMote extends AbstractEmulatedMote implements Mote, Watc
+@@ -107,12 +111,49 @@ public abstract class MspMote extends AbstractEmulatedMote implements Mote, Watc
      /* Schedule us immediately */
      requestImmediateWakeup();
    }

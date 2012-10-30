@@ -1,4 +1,4 @@
-# This series applies on GIT commit ec1ee5d47b80c148719566637dcd42a621de7c16
+# This series applies on GIT commit 57c5fd60da659cc474e993aac7d681a6594b38a4
 cooja_load_all
 cooja_javascript_warnings
 cooja_motes_uninit
@@ -25,3 +25,4 @@ cooja_MSPSIM_WarnStream
 cooja_rssi_range
 cooja_updateGUIComponentState_public
 cooja_fix_vis_move
+cooja_contikimote_lqi_rssi

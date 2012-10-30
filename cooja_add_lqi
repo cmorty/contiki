@@ -10,10 +10,10 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
  3 files changed, 46 insertions(+), 4 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/plugins/DGRMConfigurator.java b/tools/cooja/java/se/sics/cooja/plugins/DGRMConfigurator.java
-index f33f739..3bbc966 100644
+index 19f6408..e9edbe3 100644
 --- a/tools/cooja/java/se/sics/cooja/plugins/DGRMConfigurator.java
 +++ b/tools/cooja/java/se/sics/cooja/plugins/DGRMConfigurator.java
-@@ -92,9 +92,11 @@ public class DGRMConfigurator extends VisPlugin {
+@@ -91,9 +91,11 @@ public class DGRMConfigurator extends VisPlugin {
    private final static int IDX_DST = 1;
    private final static int IDX_RATIO = 2;
    private final static int IDX_SIGNAL = 3;
@@ -27,7 +27,7 @@ index f33f739..3bbc966 100644
    };
  
    private GUI gui = null;
-@@ -129,6 +131,10 @@ public class DGRMConfigurator extends VisPlugin {
+@@ -128,6 +130,10 @@ public class DGRMConfigurator extends VisPlugin {
            for (double d=AbstractRadioMedium.SS_STRONG; d >= AbstractRadioMedium.SS_WEAK; d -= 1) {
              combo.addItem((int) d);
            }
@@ -38,7 +38,7 @@ index f33f739..3bbc966 100644
          } else if (column == IDX_DELAY) {
            for (double d=0; d <= 5; d++) {
              combo.addItem(d);
-@@ -162,6 +168,17 @@ public class DGRMConfigurator extends VisPlugin {
+@@ -161,6 +167,17 @@ public class DGRMConfigurator extends VisPlugin {
          setText(String.format("%1.1f dBm", v));
        }
      });
@@ -56,7 +56,7 @@ index f33f739..3bbc966 100644
      graphTable.getColumnModel().getColumn(IDX_DELAY).setCellRenderer(new DefaultTableCellRenderer() {
  			private static final long serialVersionUID = -4669897764928372246L;
  			public void setValue(Object value) {
-@@ -175,6 +192,7 @@ public class DGRMConfigurator extends VisPlugin {
+@@ -174,6 +191,7 @@ public class DGRMConfigurator extends VisPlugin {
      });
      graphTable.getColumnModel().getColumn(IDX_RATIO).setCellEditor(new DefaultCellEditor(combo));
      graphTable.getColumnModel().getColumn(IDX_SIGNAL).setCellEditor(new DefaultCellEditor(combo));
@@ -64,7 +64,7 @@ index f33f739..3bbc966 100644
      graphTable.getColumnModel().getColumn(IDX_DELAY).setCellEditor(new DefaultCellEditor(combo));
  
      graphTable.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-@@ -412,6 +430,9 @@ public class DGRMConfigurator extends VisPlugin {
+@@ -411,6 +429,9 @@ public class DGRMConfigurator extends VisPlugin {
        if (column == IDX_SIGNAL) {
          return ((DGRMDestinationRadio)edge.superDest).signal;
        }
@@ -74,7 +74,7 @@ index f33f739..3bbc966 100644
        if (column == IDX_DELAY) {
          return ((DGRMDestinationRadio)edge.superDest).delay / Simulation.MILLISECOND;
        }
-@@ -434,7 +455,10 @@ public class DGRMConfigurator extends VisPlugin {
+@@ -433,7 +454,10 @@ public class DGRMConfigurator extends VisPlugin {
        	} else if (column == IDX_DELAY) {
        		((DGRMDestinationRadio)edge.superDest).delay =
        			((Number)value).longValue() * Simulation.MILLISECOND;
@@ -86,7 +86,7 @@ index f33f739..3bbc966 100644
            super.setValueAt(value, row, column);
        	}
        	radioMedium.requestEdgeAnalysis();
-@@ -462,6 +486,9 @@ public class DGRMConfigurator extends VisPlugin {
+@@ -461,6 +485,9 @@ public class DGRMConfigurator extends VisPlugin {
        if (column == IDX_SIGNAL) {
          return true;
        }
@@ -97,10 +97,10 @@ index f33f739..3bbc966 100644
          return true;
        }
 diff --git a/tools/cooja/java/se/sics/cooja/plugins/skins/DGRMVisualizerSkin.java b/tools/cooja/java/se/sics/cooja/plugins/skins/DGRMVisualizerSkin.java
-index df2d869..012d46f 100644
+index d49ab89..be31c01 100644
 --- a/tools/cooja/java/se/sics/cooja/plugins/skins/DGRMVisualizerSkin.java
 +++ b/tools/cooja/java/se/sics/cooja/plugins/skins/DGRMVisualizerSkin.java
-@@ -118,6 +118,11 @@ public class DGRMVisualizerSkin implements VisualizerSkin {
+@@ -117,6 +117,11 @@ public class DGRMVisualizerSkin implements VisualizerSkin {
  		g.drawString(msg, x - msgWidth/2, y + 2*Visualizer.MOTE_RADIUS + 3);
  		for (DestinationRadio r: dests) {
  			double prob = ((DGRMDestinationRadio)r).ratio;
@@ -112,7 +112,7 @@ index df2d869..012d46f 100644
  			if (prob == 0.0d) {
  				continue;
  			}
-@@ -125,7 +130,8 @@ public class DGRMVisualizerSkin implements VisualizerSkin {
+@@ -124,7 +129,8 @@ public class DGRMVisualizerSkin implements VisualizerSkin {
  			Position pos = r.radio.getPosition();
  			Point pixel = visualizer.transformPositionToPixel(pos);
  			msgWidth = fm.stringWidth(msg);
@@ -123,10 +123,10 @@ index df2d869..012d46f 100644
  			g.setColor(Color.BLACK);
  			g.drawString(msg, pixel.x - msgWidth/2, pixel.y + 2*Visualizer.MOTE_RADIUS + 3);
 diff --git a/tools/cooja/java/se/sics/cooja/radiomediums/DGRMDestinationRadio.java b/tools/cooja/java/se/sics/cooja/radiomediums/DGRMDestinationRadio.java
-index cf1dc08..ac17353 100644
+index f733978..7ccf064 100644
 --- a/tools/cooja/java/se/sics/cooja/radiomediums/DGRMDestinationRadio.java
 +++ b/tools/cooja/java/se/sics/cooja/radiomediums/DGRMDestinationRadio.java
-@@ -42,6 +42,7 @@ public class DGRMDestinationRadio extends DestinationRadio {
+@@ -41,6 +41,7 @@ public class DGRMDestinationRadio extends DestinationRadio {
  	public double ratio = 1.0; /* Link success ratio (per packet). */
  	public double signal = AbstractRadioMedium.SS_STRONG; /* RSSI */
  	public long delay = 0; /* EXPERIMENTAL: Propagation delay (us). */
@@ -134,7 +134,7 @@ index cf1dc08..ac17353 100644
  
  	public DGRMDestinationRadio() {
  		super();
-@@ -55,6 +56,7 @@ public class DGRMDestinationRadio extends DestinationRadio {
+@@ -54,6 +55,7 @@ public class DGRMDestinationRadio extends DestinationRadio {
  		clone.ratio = this.ratio;
  		clone.delay = this.delay;
  		clone.signal = this.signal;
@@ -142,7 +142,7 @@ index cf1dc08..ac17353 100644
  		return clone;
  	}
  	
-@@ -70,6 +72,11 @@ public class DGRMDestinationRadio extends DestinationRadio {
+@@ -69,6 +71,11 @@ public class DGRMDestinationRadio extends DestinationRadio {
  		element.setText("" + signal);
  		config.add(element);
  
@@ -154,7 +154,7 @@ index cf1dc08..ac17353 100644
  		element = new Element("delay");
  		element.setText("" + delay);
  		config.add(element);
-@@ -86,6 +93,8 @@ public class DGRMDestinationRadio extends DestinationRadio {
+@@ -85,6 +92,8 @@ public class DGRMDestinationRadio extends DestinationRadio {
  				ratio = Double.parseDouble(element.getText());
  			} else if (element.getName().equals("signal")) {
  				signal = Double.parseDouble(element.getText());

@@ -8,10 +8,10 @@ Subject: Refactored AbstractRadioMedium:update(): if -> switch
  1 files changed, 169 insertions(+), 175 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/radiomediums/AbstractRadioMedium.java b/tools/cooja/java/se/sics/cooja/radiomediums/AbstractRadioMedium.java
-index 3ae9b52..b131769 100644
+index d6c9430..903af3c 100644
 --- a/tools/cooja/java/se/sics/cooja/radiomediums/AbstractRadioMedium.java
 +++ b/tools/cooja/java/se/sics/cooja/radiomediums/AbstractRadioMedium.java
-@@ -224,200 +224,194 @@ public abstract class AbstractRadioMedium extends RadioMedium {
+@@ -223,200 +223,194 @@ public abstract class AbstractRadioMedium extends RadioMedium {
  			Radio radio = (Radio) obs;
  			
  			final Radio.RadioEvent event = radio.getLastEvent();
@@ -380,7 +380,7 @@ index 3ae9b52..b131769 100644
  			}
  		}
  	};
-@@ -473,5 +467,5 @@ public abstract class AbstractRadioMedium extends RadioMedium {
+@@ -472,5 +466,5 @@ public abstract class AbstractRadioMedium extends RadioMedium {
  	public RadioConnection getLastConnection() {
  		return lastConnection;
  	}

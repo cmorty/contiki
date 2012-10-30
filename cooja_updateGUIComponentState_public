@@ -9,10 +9,10 @@ This is actually a workaround, that is needed to allow plugins to add
  1 files changed, 1 insertions(+), 1 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index 9490453..6416339 100644
+index d9bad25..fff38cc 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
-@@ -671,7 +671,7 @@ public class GUI extends Observable {
+@@ -670,7 +670,7 @@ public class GUI extends Observable {
    /**
     * Enables/disables menues and menu items depending on whether a simulation is loaded etc.
     */

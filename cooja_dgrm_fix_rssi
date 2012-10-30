@@ -9,10 +9,10 @@ Subject: DGRM: Change DirectedGraphMedium over to DGRMDestinationRadio and fix R
  2 files changed, 28 insertions(+), 34 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/radiomediums/DirectedGraphMedium.java b/tools/cooja/java/se/sics/cooja/radiomediums/DirectedGraphMedium.java
-index 78d48e5..0ff5bbc 100644
+index 9d63c77..a50315c 100644
 --- a/tools/cooja/java/se/sics/cooja/radiomediums/DirectedGraphMedium.java
 +++ b/tools/cooja/java/se/sics/cooja/radiomediums/DirectedGraphMedium.java
-@@ -72,7 +72,7 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
+@@ -71,7 +71,7 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
    private boolean edgesDirty = true;
  
    /* Used for optimizing lookup time */
@@ -21,7 +21,7 @@ index 78d48e5..0ff5bbc 100644
  
    public DirectedGraphMedium() {
      /* Do not initialize radio medium: use only for hash table */
-@@ -165,29 +165,23 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
+@@ -164,29 +164,23 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
      /* Set signal strengths */
      RadioConnection[] conns = getActiveConnections();
      for (RadioConnection conn : conns) {
@@ -61,7 +61,7 @@ index 78d48e5..0ff5bbc 100644
    }
  
  
-@@ -196,14 +190,14 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
+@@ -195,14 +189,14 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
     * Generates hash table using current edges for efficient lookup.
     */
    protected void analyzeEdges() {
@@ -80,7 +80,7 @@ index 78d48e5..0ff5bbc 100644
        } else {
          destRadios = listTable.get(edge.source);
        }
-@@ -213,11 +207,11 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
+@@ -212,11 +206,11 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
      }
  
      /* Convert to arrays */
@@ -94,7 +94,7 @@ index 78d48e5..0ff5bbc 100644
        arrTable.put(source, arr);
      }
  
-@@ -232,7 +226,7 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
+@@ -231,7 +225,7 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
     * @param source Source radio
     * @return All potential destination radios
     */
@@ -103,7 +103,7 @@ index 78d48e5..0ff5bbc 100644
      if (edgesDirty) {
        analyzeEdges();
      }
-@@ -250,7 +244,7 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
+@@ -249,7 +243,7 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
  
      /* Create new radio connection using edge hash table */
      RadioConnection newConn = new RadioConnection(source);
@@ -112,7 +112,7 @@ index 78d48e5..0ff5bbc 100644
      if (destinations == null || destinations.length == 0) {
        /* No destinations */
        /*logger.info(sendingRadio + ": No dest");*/
-@@ -258,8 +252,8 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
+@@ -257,8 +251,8 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
      }
  
      /*logger.info(source + ": " + destinations.length + " potential destinations");*/
@@ -123,7 +123,7 @@ index 78d48e5..0ff5bbc 100644
        if (dest.radio == source) {
          /* Fail: cannot receive our own transmission */
          /*logger.info(source + ": Fail, receiver is sender");*/
-@@ -369,7 +363,7 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
+@@ -368,7 +362,7 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
        if (element.getName().equals("edge")) {
          Collection<Element> edgeConfig = element.getChildren();
          Radio source = null;
@@ -132,7 +132,7 @@ index 78d48e5..0ff5bbc 100644
          for (Element edgeElement : edgeConfig) {
            if (edgeElement.getName().equals("src")) {
              oldConfig = true;
-@@ -388,7 +382,7 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
+@@ -387,7 +381,7 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
            } else if (oldConfig && edgeElement.getName().equals("ratio")) {
              /* Old config: parse link ratio */
              double ratio = Double.parseDouble(edgeElement.getText());
@@ -141,7 +141,7 @@ index 78d48e5..0ff5bbc 100644
            } else if (edgeElement.getName().equals("dest")) {
              if (oldConfig) {
                /* Old config: create simple destination link */
-@@ -406,8 +400,8 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
+@@ -405,8 +399,8 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
                if (destClassName == null || destClassName.isEmpty()) {
                  continue;
                }
@@ -152,7 +152,7 @@ index 78d48e5..0ff5bbc 100644
                if (destClass == null) {
                  throw new RuntimeException("Could not load class: " + destClassName);
                }
-@@ -435,9 +429,9 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
+@@ -434,9 +428,9 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
  
    public static class Edge {
      public Radio source = null;
@@ -165,10 +165,10 @@ index 78d48e5..0ff5bbc 100644
        this.superDest = dest;
      }
 diff --git a/tools/cooja/java/se/sics/cooja/radiomediums/UDGM.java b/tools/cooja/java/se/sics/cooja/radiomediums/UDGM.java
-index 82865c6..0e035ab 100644
+index 9e63787..48d05c6 100644
 --- a/tools/cooja/java/se/sics/cooja/radiomediums/UDGM.java
 +++ b/tools/cooja/java/se/sics/cooja/radiomediums/UDGM.java
-@@ -113,7 +113,7 @@ public class UDGM extends AbstractRadioMedium {
+@@ -112,7 +112,7 @@ public class UDGM extends AbstractRadioMedium {
                /* Add potential destination */
                addEdge(
                    new DirectedGraphMedium.Edge(source, 

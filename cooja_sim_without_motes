@@ -10,10 +10,10 @@ Normally it is not possible to start a simulation without motes. While
  1 files changed, 0 insertions(+), 3 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/Simulation.java b/tools/cooja/java/se/sics/cooja/Simulation.java
-index 6f2d184..cbf6eea 100644
+index 125e907..71c5bfc 100644
 --- a/tools/cooja/java/se/sics/cooja/Simulation.java
 +++ b/tools/cooja/java/se/sics/cooja/Simulation.java
-@@ -1105,9 +1105,6 @@ public class Simulation extends Observable implements Runnable {
+@@ -1104,9 +1104,6 @@ public class Simulation extends Observable implements Runnable {
     * @return True if simulation is runnable
     */
    public boolean isRunnable() {

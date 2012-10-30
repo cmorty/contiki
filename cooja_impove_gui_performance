@@ -10,10 +10,10 @@ This improves the performace of Nimbus significantly. Unfortunately it
  1 files changed, 31 insertions(+), 3 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index 95f0268..9490453 100644
+index 12c0d4b..d9bad25 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
-@@ -37,6 +37,7 @@ import java.awt.Dialog;
+@@ -36,6 +36,7 @@ import java.awt.Dialog;
  import java.awt.Dialog.ModalityType;
  import java.awt.Dimension;
  import java.awt.Frame;
@@ -21,7 +21,7 @@ index 95f0268..9490453 100644
  import java.awt.GraphicsDevice;
  import java.awt.GraphicsEnvironment;
  import java.awt.GridLayout;
-@@ -61,16 +62,13 @@ import java.io.InputStream;
+@@ -60,16 +61,13 @@ import java.io.InputStream;
  import java.io.OutputStream;
  import java.io.PrintStream;
  import java.io.StringReader;
@@ -38,7 +38,7 @@ index 95f0268..9490453 100644
  import java.util.Enumeration;
  import java.util.List;
  import java.util.Observable;
-@@ -112,6 +110,7 @@ import javax.swing.JTextPane;
+@@ -111,6 +109,7 @@ import javax.swing.JTextPane;
  import javax.swing.KeyStroke;
  import javax.swing.SwingUtilities;
  import javax.swing.ToolTipManager;
@@ -46,7 +46,7 @@ index 95f0268..9490453 100644
  import javax.swing.UIManager;
  import javax.swing.UIManager.LookAndFeelInfo;
  import javax.swing.UnsupportedLookAndFeelException;
-@@ -129,6 +128,8 @@ import org.jdom.input.SAXBuilder;
+@@ -128,6 +127,8 @@ import org.jdom.input.SAXBuilder;
  import org.jdom.output.Format;
  import org.jdom.output.XMLOutputter;
  
@@ -55,7 +55,7 @@ index 95f0268..9490453 100644
  import se.sics.cooja.MoteType.MoteTypeCreationException;
  import se.sics.cooja.VisPlugin.PluginRequiresVisualizationException;
  import se.sics.cooja.contikimote.ContikiMoteType;
-@@ -1306,6 +1307,33 @@ public class GUI extends Observable {
+@@ -1305,6 +1306,33 @@ public class GUI extends Observable {
          updateDesktopSize(this);
          return c;
        }

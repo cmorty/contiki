@@ -9,10 +9,10 @@ mesh_ready checkes whether a packet is queued.
  2 files changed, 15 insertions(+), 0 deletions(-)
 
 diff --git a/core/net/rime/mesh.c b/core/net/rime/mesh.c
-index bb11f1a..a9d968d 100644
+index 0ceecb4..f03a880 100644
 --- a/core/net/rime/mesh.c
 +++ b/core/net/rime/mesh.c
-@@ -196,4 +196,11 @@ mesh_send(struct mesh_conn *c, const rimeaddr_t *to)
+@@ -195,4 +195,11 @@ mesh_send(struct mesh_conn *c, const rimeaddr_t *to)
    return 1;
  }
  /*---------------------------------------------------------------------------*/
@@ -25,10 +25,10 @@ index bb11f1a..a9d968d 100644
 +
  /** @} */
 diff --git a/core/net/rime/mesh.h b/core/net/rime/mesh.h
-index 7787a32..cdafa75 100644
+index 1bcf9f3..5bd67cd 100644
 --- a/core/net/rime/mesh.h
 +++ b/core/net/rime/mesh.h
-@@ -134,6 +134,14 @@ void mesh_close(struct mesh_conn *c);
+@@ -133,6 +133,14 @@ void mesh_close(struct mesh_conn *c);
   */
  int mesh_send(struct mesh_conn *c, const rimeaddr_t *dest);
  

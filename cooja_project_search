@@ -9,10 +9,10 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
  2 files changed, 58 insertions(+), 2 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/COOJAProject.java b/tools/cooja/java/se/sics/cooja/COOJAProject.java
-index 4e7984f..b2f06c9 100644
+index 5e303c5..685e333 100644
 --- a/tools/cooja/java/se/sics/cooja/COOJAProject.java
 +++ b/tools/cooja/java/se/sics/cooja/COOJAProject.java
-@@ -30,21 +30,62 @@
+@@ -29,21 +29,62 @@
  package se.sics.cooja;
  
  import java.io.File;
@@ -77,10 +77,10 @@ index 4e7984f..b2f06c9 100644
  	public COOJAProject(File dir) {
  		try {
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index b6def82..5f42c51 100644
+index 6434d6f..a0e7a78 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
-@@ -248,7 +248,8 @@ public class GUI extends Observable {
+@@ -247,7 +247,8 @@ public class GUI extends Observable {
    public static Properties currentExternalToolsSettings;
  
    private static final String externalToolsSettingNames[] = new String[] {
@@ -90,7 +90,7 @@ index b6def82..5f42c51 100644
  
      "PATH_MAKE",
      "PATH_SHELL",
-@@ -427,6 +428,20 @@ public class GUI extends Observable {
+@@ -426,6 +427,20 @@ public class GUI extends Observable {
          currentProjects.add(new COOJAProject(projectDir));
        }
      }

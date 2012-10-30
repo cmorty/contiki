@@ -8,10 +8,10 @@ From: Sébastien Dawans <sdawans@gmail.com>
  1 files changed, 36 insertions(+), 32 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/plugins/Visualizer.java b/tools/cooja/java/se/sics/cooja/plugins/Visualizer.java
-index b95d8ac..f3274ab 100644
+index fa6d272..707bc9a 100644
 --- a/tools/cooja/java/se/sics/cooja/plugins/Visualizer.java
 +++ b/tools/cooja/java/se/sics/cooja/plugins/Visualizer.java
-@@ -156,6 +156,7 @@ public class Visualizer extends VisPlugin implements HasQuickHelp {
+@@ -155,6 +155,7 @@ public class Visualizer extends VisPlugin implements HasQuickHelp {
    private Position zoomingPosition = null; /* Zooming center position */
    private Point zoomingPixel = null; /* Zooming center pixel */
    private boolean moving = false;
@@ -19,7 +19,7 @@ index b95d8ac..f3274ab 100644
    private Mote movedMote = null;
    public Mote clickedMote = null;
    private long moveStartTime = -1;
-@@ -814,6 +815,7 @@ public class Visualizer extends VisPlugin implements HasQuickHelp {
+@@ -813,6 +814,7 @@ public class Visualizer extends VisPlugin implements HasQuickHelp {
  
      if (motes != null && motes.length > 0) {
        /* One of the clicked motes should be moved */
@@ -27,7 +27,7 @@ index b95d8ac..f3274ab 100644
        clickedMote = motes[0];
        beginMoveRequest(motes[0], false, false);
      }
-@@ -903,46 +905,48 @@ public class Visualizer extends VisPlugin implements HasQuickHelp {
+@@ -902,46 +904,48 @@ public class Visualizer extends VisPlugin implements HasQuickHelp {
  
      /* Moving */
      if (moving) {

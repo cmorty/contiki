@@ -8,10 +8,10 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
  1 files changed, 34 insertions(+), 1 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/Simulation.java b/tools/cooja/java/se/sics/cooja/Simulation.java
-index 4b21878..6f2d184 100644
+index 3e76cbd..125e907 100644
 --- a/tools/cooja/java/se/sics/cooja/Simulation.java
 +++ b/tools/cooja/java/se/sics/cooja/Simulation.java
-@@ -60,7 +60,8 @@ public class Simulation extends Observable implements Runnable {
+@@ -59,7 +59,8 @@ public class Simulation extends Observable implements Runnable {
    /*private static long EVENT_COUNTER = 0;*/
  
    private Vector<Mote> motes = new Vector<Mote>();
@@ -21,7 +21,7 @@ index 4b21878..6f2d184 100644
    private Vector<MoteType> moteTypes = new Vector<MoteType>();
  
    /* If true, run simulation at full speed */
-@@ -820,6 +821,7 @@ public class Simulation extends Observable implements Runnable {
+@@ -819,6 +820,7 @@ public class Simulation extends Observable implements Runnable {
          }
  
          motes.add(mote);
@@ -29,7 +29,7 @@ index 4b21878..6f2d184 100644
          currentRadioMedium.registerMote(mote, Simulation.this);
  
          /* Notify mote interfaces that node was added */
-@@ -839,6 +841,9 @@ public class Simulation extends Observable implements Runnable {
+@@ -838,6 +840,9 @@ public class Simulation extends Observable implements Runnable {
        /* Add mote from simulation thread */
        invokeSimulationThread(addMote);
      }
@@ -39,7 +39,7 @@ index 4b21878..6f2d184 100644
    }
  
    /**
-@@ -870,6 +875,24 @@ public class Simulation extends Observable implements Runnable {
+@@ -869,6 +874,24 @@ public class Simulation extends Observable implements Runnable {
    }
  
    /**
@@ -64,7 +64,7 @@ index 4b21878..6f2d184 100644
     * Returns number of motes in this simulation.
     *
     * @return Number of motes
-@@ -890,6 +913,16 @@ public class Simulation extends Observable implements Runnable {
+@@ -889,6 +912,16 @@ public class Simulation extends Observable implements Runnable {
    }
  
    /**

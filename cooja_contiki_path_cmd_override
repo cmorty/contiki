@@ -8,10 +8,10 @@ Fix command line override of ContikiPath
  1 files changed, 1 insertions(+), 5 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index 5f42c51..95f0268 100644
+index a0e7a78..12c0d4b 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
-@@ -2791,11 +2791,7 @@ public class GUI extends Observable {
+@@ -2790,11 +2790,7 @@ public class GUI extends Observable {
     *          New value
     */
    public static void setExternalToolsSetting(String name, String newVal) {

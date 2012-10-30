@@ -8,10 +8,10 @@ Subject: Change indention of AbstractRadioMedium to tabs
  1 files changed, 412 insertions(+), 412 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/radiomediums/AbstractRadioMedium.java b/tools/cooja/java/se/sics/cooja/radiomediums/AbstractRadioMedium.java
-index b0b4d1e..3ae9b52 100644
+index 08e59b1..d6c9430 100644
 --- a/tools/cooja/java/se/sics/cooja/radiomediums/AbstractRadioMedium.java
 +++ b/tools/cooja/java/se/sics/cooja/radiomediums/AbstractRadioMedium.java
-@@ -62,416 +62,416 @@ import se.sics.cooja.interfaces.Radio;
+@@ -61,416 +61,416 @@ import se.sics.cooja.interfaces.Radio;
   * @author Fredrik Osterlind
   */
  public abstract class AbstractRadioMedium extends RadioMedium {

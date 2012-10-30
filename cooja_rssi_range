@@ -9,10 +9,10 @@ Certain values cause the DGRMVisualizerSkin to calculate color values
  1 files changed, 4 insertions(+), 0 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/plugins/skins/DGRMVisualizerSkin.java b/tools/cooja/java/se/sics/cooja/plugins/skins/DGRMVisualizerSkin.java
-index 012d46f..5c30aa7 100644
+index be31c01..77b86bc 100644
 --- a/tools/cooja/java/se/sics/cooja/plugins/skins/DGRMVisualizerSkin.java
 +++ b/tools/cooja/java/se/sics/cooja/plugins/skins/DGRMVisualizerSkin.java
-@@ -122,7 +122,11 @@ public class DGRMVisualizerSkin implements VisualizerSkin {
+@@ -121,7 +121,11 @@ public class DGRMVisualizerSkin implements VisualizerSkin {
  			double pos_rssi = rssi + 100;
  			int lqi = ((DGRMDestinationRadio)r).lqi;
  			float red = (float)(1 - prob*pos_rssi/90*lqi/100);
