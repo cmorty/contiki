@@ -59,6 +59,8 @@
 #include <stdio.h>
 #include <stddef.h>
 
+
+
 static const struct packetbuf_attrlist attributes[] =
   {
     COLLECT_ATTRIBUTES
@@ -70,7 +72,11 @@ static const struct packetbuf_attrlist attributes[] =
    and the connection for packets that have been recently
    forwarded. This list is maintained to avoid forwarding duplicate
    packets. */
+#ifndef COLLECT_CONF_RECENT_PACKETS
 #define NUM_RECENT_PACKETS 16
+#else
+#define NUM_RECENT_PACKETS COLLECT_CONF_RECENT_PACKETS
+#endif
 
 struct recent_packet {
   struct collect_conn *conn;
