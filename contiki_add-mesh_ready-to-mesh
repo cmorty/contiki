@@ -1,18 +1,19 @@
-Subject: Add mesh_ready() to mesh
+Add mesh_ready() to mesh
 
 From: Moritz 'Morty' Strübe <morty@gmx.net>
 
-mesh_ready checkes whether a packet is queued.
+mesh_ready checkes whether a packet is queued. This allows to avoid
+packet loss at application level.
 ---
  core/net/rime/mesh.c |    7 +++++++
  core/net/rime/mesh.h |    8 ++++++++
- 2 files changed, 15 insertions(+), 0 deletions(-)
+ 2 files changed, 15 insertions(+)
 
 diff --git a/core/net/rime/mesh.c b/core/net/rime/mesh.c
-index 0ceecb4..f03a880 100644
+index 39231cc..98ca978 100644
 --- a/core/net/rime/mesh.c
 +++ b/core/net/rime/mesh.c
-@@ -195,4 +195,11 @@ mesh_send(struct mesh_conn *c, const rimeaddr_t *to)
+@@ -201,4 +201,11 @@ mesh_send(struct mesh_conn *c, const rimeaddr_t *to)
    return 1;
  }
  /*---------------------------------------------------------------------------*/
@@ -25,7 +26,7 @@ index 0ceecb4..f03a880 100644
 +
  /** @} */
 diff --git a/core/net/rime/mesh.h b/core/net/rime/mesh.h
-index 1bcf9f3..5bd67cd 100644
+index 1bcf9f3..394e428 100644
 --- a/core/net/rime/mesh.h
 +++ b/core/net/rime/mesh.h
 @@ -133,6 +133,14 @@ void mesh_close(struct mesh_conn *c);
@@ -33,7 +34,7 @@ index 1bcf9f3..5bd67cd 100644
  int mesh_send(struct mesh_conn *c, const rimeaddr_t *dest);
  
 +/**
-+ * \brief      Test is mesh is ready (or packet is queued)
++ * \brief      Test if mesh is ready to send a packet (or packet is queued)
 + * \param c    The mesh connection on which is to be tested
 + * \retval 0   Packet queued
 + * \retval !0  Ready

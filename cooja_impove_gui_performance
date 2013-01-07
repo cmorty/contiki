@@ -7,10 +7,10 @@ This improves the performace of Nimbus significantly. Unfortunately it
  fixed in Java 7.
 ---
  tools/cooja/java/se/sics/cooja/GUI.java |   34 ++++++++++++++++++++++++++++---
- 1 files changed, 31 insertions(+), 3 deletions(-)
+ 1 file changed, 31 insertions(+), 3 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index 12c0d4b..d9bad25 100644
+index 2e04c10..a6d9fb7 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
 @@ -36,6 +36,7 @@ import java.awt.Dialog;
@@ -55,7 +55,7 @@ index 12c0d4b..d9bad25 100644
  import se.sics.cooja.MoteType.MoteTypeCreationException;
  import se.sics.cooja.VisPlugin.PluginRequiresVisualizationException;
  import se.sics.cooja.contikimote.ContikiMoteType;
-@@ -1305,6 +1306,33 @@ public class GUI extends Observable {
+@@ -1291,6 +1292,33 @@ public class GUI extends Observable {
          updateDesktopSize(this);
          return c;
        }

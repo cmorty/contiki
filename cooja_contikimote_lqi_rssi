@@ -1,0 +1,91 @@
+Add access to LQI and RSSI to Contiki motes
+
+From: Yvonne-Anne Pignolet <yvonneanne.pignolet@gmail.com>
+
+
+---
+ platform/cooja/dev/cooja-radio.c                   |   10 ++++++++++
+ platform/cooja/dev/cooja-radio.h                   |    7 +++++++
+ .../cooja/contikimote/interfaces/ContikiRadio.java |   18 ++++++++++++++++++
+ 3 files changed, 35 insertions(+)
+
+diff --git a/platform/cooja/dev/cooja-radio.c b/platform/cooja/dev/cooja-radio.c
+index e7cdce6..5a356f1 100644
+--- a/platform/cooja/dev/cooja-radio.c
++++ b/platform/cooja/dev/cooja-radio.c
+@@ -62,6 +62,7 @@ int simSignalStrength = -100;
+ int simLastSignalStrength = -100;
+ char simPower = 100;
+ int simRadioChannel = 26;
++int simLQI = 105;
+ 
+ static const void *pending_data;
+ 
+@@ -93,6 +94,12 @@ radio_signal_strength_current(void)
+   return simSignalStrength;
+ }
+ /*---------------------------------------------------------------------------*/
++int
++radio_LQI(void)
++{
++	return simLQI;
++}
++/*---------------------------------------------------------------------------*/
+ static int
+ radio_on(void)
+ {
+@@ -145,6 +152,9 @@ radio_read(void *buf, unsigned short bufsize)
+ 
+   memcpy(buf, simInDataBuffer, simInSize);
+   simInSize = 0;
++  packetbuf_set_attr(PACKETBUF_ATTR_RSSI, simSignalStrength);
++  packetbuf_set_attr(PACKETBUF_ATTR_LINK_QUALITY, simLQI);
++
+   return tmp;
+ }
+ /*---------------------------------------------------------------------------*/
+diff --git a/platform/cooja/dev/cooja-radio.h b/platform/cooja/dev/cooja-radio.h
+index 7c3f5e3..40873c9 100644
+--- a/platform/cooja/dev/cooja-radio.h
++++ b/platform/cooja/dev/cooja-radio.h
+@@ -64,4 +64,11 @@ radio_signal_strength_last(void);
+ int
+ radio_signal_strength_current(void);
+ 
++/**
++ * Link quality indicator of last received packet.
++ */
++int
++radio_LQI(void);
++
++
+ #endif /* __COOJA_RADIO_H__ */
+diff --git a/tools/cooja/java/se/sics/cooja/contikimote/interfaces/ContikiRadio.java b/tools/cooja/java/se/sics/cooja/contikimote/interfaces/ContikiRadio.java
+index 9c5d9de..279c360 100644
+--- a/tools/cooja/java/se/sics/cooja/contikimote/interfaces/ContikiRadio.java
++++ b/tools/cooja/java/se/sics/cooja/contikimote/interfaces/ContikiRadio.java
+@@ -257,6 +257,24 @@ public class ContikiRadio extends Radio implements ContikiMoteInterface, PolledA
+     myMoteMemory.setIntValueOf("simSignalStrength", (int) signalStrength);
+   }
+ 
++  /** Set LQI to a value between 0 and 255.
++   * 
++   * @see se.sics.cooja.interfaces.Radio#setLQI(int)
++   */
++  public void setLQI(int lqi){
++    if(lqi<0) {
++      lqi=0;
++    }
++    else if(lqi>0xff) {
++      lqi=0xff;
++    }
++    myMoteMemory.setIntValueOf("simLQI", lqi);
++  }
++
++  public int getLQI(){
++    return myMoteMemory.getIntValueOf("simLQI");
++  }
++
+   public Position getPosition() {
+     return mote.getInterfaces().getPosition();
+   }

@@ -1,15 +1,15 @@
-From 7f36d12906bd63edc0b67a2e76696ac8c99b8895 Mon Sep 17 00:00:00 2001
+Cooja: Give better Javascript warnings
 
-From: =?UTF-8?q?Moritz=20'Morty'=20Str=C3=BCbe?= <morty@gmx.net>
+From: Moritz 'Morty' Strübe <morty@gmx.net>
 
-Subject: [PATCH] Cooja: Give better Javascript warnings
+
 ---
  .../se/sics/cooja/plugins/LogScriptEngine.java     |   38 +++++++++++++++++---
  .../java/se/sics/cooja/plugins/ScriptRunner.java   |   12 +++++-
  2 files changed, 41 insertions(+), 9 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java b/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
-index c70f35f..977f1e7 100644
+index 15719b0..0a203cd 100644
 --- a/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
 +++ b/tools/cooja/java/se/sics/cooja/plugins/LogScriptEngine.java
 @@ -41,6 +41,7 @@ import javax.script.Invocable;

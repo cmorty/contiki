@@ -1,17 +1,17 @@
-From bccfa6566e066975f1839cc9bbf36d94a755ce43 Mon Sep 17 00:00:00 2001
+Make reimaddr-functions more efficient
 
 From: Moritz 'Morty' Strübe <morty@gmx.net>
 
-Make reimaddr-functions more efficient
+
 ---
- core/net/rime/rimeaddr.h |  104 ++++++++++++++++++++++++++++++++++++----------
- 1 files changed, 82 insertions(+), 22 deletions(-)
+ core/net/rime/rimeaddr.h |  113 +++++++++++++++++++++++++++++++++++++---------
+ 1 file changed, 91 insertions(+), 22 deletions(-)
 
 diff --git a/core/net/rime/rimeaddr.h b/core/net/rime/rimeaddr.h
-index 962b438..5f4e22e 100644
+index 962b438..adda015 100644
 --- a/core/net/rime/rimeaddr.h
 +++ b/core/net/rime/rimeaddr.h
-@@ -62,12 +62,50 @@
+@@ -62,12 +62,61 @@
  #define RIMEADDR_SIZE 2
  #endif /* RIMEADDR_SIZE */
  
@@ -22,9 +22,20 @@ index 962b438..5f4e22e 100644
 +#define RIMEADDR_MEM_FUNC 0
 +#endif
 +
-+#if RIMEADDR_MEM_FUNC
++#if RIMEADDR_MEM_FUNC == 1
 +#include <string.h>
 +#endif
++
++#if RIMEADDR_MEM_FUNC != 0
++# ifndef RIMEADDR_INLINE
++#  if __GNUC__ && !__GNUC_STDC_INLINE__
++#   define RIMEADDR_INLINE extern inline
++#  else
++#   define RIMEADDR_INLINE inline
++#  endif
++# endif
++#endif
++
 +
 +
  typedef union {
@@ -62,20 +73,19 @@ index 962b438..5f4e22e 100644
   * \brief      Copy a Rime address
   * \param dest The destination
   * \param from The source
-@@ -76,7 +114,23 @@ typedef union {
+@@ -76,7 +125,22 @@ typedef union {
   *             to another.
   *
   */
 +#if ! RIMEADDR_MEM_FUNC
  void rimeaddr_copy(rimeaddr_t *dest, const rimeaddr_t *from);
 +#elif RIMEADDR_MEM_FUNC == 1
-+extern inline void rimeaddr_copy(rimeaddr_t *dest, const rimeaddr_t *from)
++RIMEADDR_INLINE void rimeaddr_copy(rimeaddr_t *dest, const rimeaddr_t *from)
 +{
 +	memcpy((char *)dest, (char *)from, RIMEADDR_SIZE);
 +}
 +#else
-+extern inline void
-+rimeaddr_copy(rimeaddr_t *dest, const rimeaddr_t *src)
++RIMEADDR_INLINE void rimeaddr_copy(rimeaddr_t *dest, const rimeaddr_t *src)
 +{
 +  u8_t i;
 +  for(i = 0; i < RIMEADDR_SIZE; i++) {
@@ -86,7 +96,7 @@ index 962b438..5f4e22e 100644
  
  /**
   * \brief      Compare two Rime addresses
-@@ -90,7 +144,27 @@ void rimeaddr_copy(rimeaddr_t *dest, const rimeaddr_t *from);
+@@ -90,7 +154,26 @@ void rimeaddr_copy(rimeaddr_t *dest, const rimeaddr_t *from);
   *             are the same, and zero if the addresses are different.
   *
   */
@@ -94,13 +104,12 @@ index 962b438..5f4e22e 100644
 +#if ! RIMEADDR_MEM_FUNC
  int rimeaddr_cmp(const rimeaddr_t *addr1, const rimeaddr_t *addr2);
 +#elif RIMEADDR_MEM_FUNC == 1
-+extern inline int rimeaddr_cmp(const rimeaddr_t *addr1, const rimeaddr_t *addr2)
++RIMEADDR_INLINE int rimeaddr_cmp(const rimeaddr_t *addr1, const rimeaddr_t *addr2)
 +{
 +	return !memcmp((char *)addr1, (char *)addr2, RIMEADDR_SIZE);
 +}
 +#else
-+extern inline int
-+rimeaddr_cmp(const rimeaddr_t *addr1, const rimeaddr_t *addr2)
++RIMEADDR_INLINE int rimeaddr_cmp(const rimeaddr_t *addr1, const rimeaddr_t *addr2)
 +{
 +  u8_t i;
 +  for(i = 0; i < RIMEADDR_SIZE; i++) {
@@ -114,14 +123,14 @@ index 962b438..5f4e22e 100644
  
  
  /**
-@@ -100,31 +174,17 @@ int rimeaddr_cmp(const rimeaddr_t *addr1, const rimeaddr_t *addr2);
+@@ -100,31 +183,17 @@ int rimeaddr_cmp(const rimeaddr_t *addr1, const rimeaddr_t *addr2);
   *             This function sets the Rime address of the node.
   *
   */
 +#if ! RIMEADDR_MEM_FUNC
  void rimeaddr_set_node_addr(rimeaddr_t *addr);
 +#else
-+extern inline void rimeaddr_set_node_addr(rimeaddr_t *t)
++RIMEADDR_INLINE void rimeaddr_set_node_addr(rimeaddr_t *t)
 +{
 +  rimeaddr_copy(&rimeaddr_node_addr, t);
 +}

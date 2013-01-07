@@ -7,7 +7,7 @@ There is a patch to add a WarnStream to MSPSim. This allows to integrate
  question.
 ---
  .../mspsim/src/se/sics/cooja/mspmote/MspMote.java  |   43 ++++++++++++++++++++
- 1 files changed, 42 insertions(+), 1 deletions(-)
+ 1 file changed, 42 insertions(+), 1 deletion(-)
 
 diff --git a/tools/cooja/apps/mspsim/src/se/sics/cooja/mspmote/MspMote.java b/tools/cooja/apps/mspsim/src/se/sics/cooja/mspmote/MspMote.java
 index 7d6286e..2af8f55 100644

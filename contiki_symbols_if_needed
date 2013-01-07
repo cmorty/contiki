@@ -1,11 +1,11 @@
-From ac23790e6de6fb3b63609bcd55a96f753c6388a3 Mon Sep 17 00:00:00 2001
+Only build symbols for Sky if they are needed.
 
 From: Moritz 'Morty' Strübe <morty@gmx.net>
 
-Only build symbols for Sky if they are needed.
+
 ---
  platform/sky/Makefile.common |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ 1 file changed, 2 insertions(+)
 
 diff --git a/platform/sky/Makefile.common b/platform/sky/Makefile.common
 index 10c9ff8..8d854cf 100644

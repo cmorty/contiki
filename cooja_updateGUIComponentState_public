@@ -6,13 +6,13 @@ This is actually a workaround, that is needed to allow plugins to add
  motes and update the display. Probably this should be fixed differently.
 ---
  tools/cooja/java/se/sics/cooja/GUI.java |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index d9bad25..fff38cc 100644
+index a6d9fb7..dad8f89 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
-@@ -670,7 +670,7 @@ public class GUI extends Observable {
+@@ -656,7 +656,7 @@ public class GUI extends Observable {
    /**
     * Enables/disables menues and menu items depending on whether a simulation is loaded etc.
     */

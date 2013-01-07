@@ -1,28 +1,13 @@
-# This series applies on GIT commit 57c5fd60da659cc474e993aac7d681a6594b38a4
-cooja_load_all
+# This series applies on GIT commit 59dc241afb6cd46dce4c1f14f1bf239c8be3c00b
 cooja_javascript_warnings
-cooja_motes_uninit
-cooja_add_lqi
-cooja_fix_missing_msg
 cooja_apps_clean
 cooja_optimize_build
 cooja_make_path_configurable
-contiki_sky_moteids
-contiki_sky_ihex
 cooja_project_search
 contiki_symbols_if_needed
 contiki_rime_memfunc
-cooja_contiki_path_cmd_override
 contiki_add-mesh_ready-to-mesh
-cooja_dgrm_fix_rssi
-cooja_AbstractRadioMedium_indention
-cooja_AbstractRadioMedium_update_refactor
-cooja_dgrm_cleanup_reception_checks
-cooja_dgrm_add_lqi
 cooja_impove_gui_performance
-cooja_sim_without_motes
 cooja_MSPSIM_WarnStream
-cooja_rssi_range
 cooja_updateGUIComponentState_public
-cooja_fix_vis_move
 cooja_contikimote_lqi_rssi
