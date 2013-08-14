@@ -52,6 +52,8 @@
 
 #include "sys/timetable.h"
 
+#include <limits.h>
+
 #define WITH_SEND_CCA 1
 
 #define FOOTER_LEN 2
@@ -314,6 +316,7 @@ cc2420_init(void)
   reg &= ~(1 << 13);
   setreg(CC2420_TXCTRL, reg);*/
 
+
   
   /* Change default values as recomended in the data sheet, */
   /* correlation threshold = 20, RX bandpass filter = 1.3uA. */
@@ -359,6 +362,7 @@ cc2420_transmit(unsigned short payload_len)
   }
 
   total_len = payload_len + AUX_LEN;
+
   
   /* The TX FIFO can only hold one packet. Make sure to not overrun
    * FIFO by waiting for transmission to start here and synchronizing
@@ -578,6 +582,7 @@ cc2420_set_pan_addr(unsigned pan,
   uint8_t tmp[2];
 
   GET_LOCK();
+
   
   /*
    * Writing RAM requires crystal oscillator to be stable.
@@ -638,14 +643,17 @@ PROCESS_THREAD(cc2420_process, ev, data)
 #if CC2420_TIMETABLE_PROFILING
     TIMETABLE_TIMESTAMP(cc2420_timetable, "poll");
 #endif /* CC2420_TIMETABLE_PROFILING */
+
     
     PRINTF("cc2420_process: calling receiver callback\n");
 
     packetbuf_clear();
     packetbuf_set_attr(PACKETBUF_ATTR_TIMESTAMP, last_packet_timestamp);
     len = cc2420_read(packetbuf_dataptr(), PACKETBUF_SIZE);
+
     
     packetbuf_set_datalen(len);
+
     
     NETSTACK_RDC.input();
 #if CC2420_TIMETABLE_PROFILING
@@ -674,8 +682,10 @@ cc2420_read(void *buf, unsigned short bufsize)
   /*  if(!pending) {
     return 0;
     }*/
+
   
   pending = 0;
+
   
   GET_LOCK();
 
@@ -780,10 +790,13 @@ cc2420_rssi(void)
 {
   int rssi;
   int radio_was_off = 0;
+  int stat;
+
 
   if(locked) {
     return 0;
   }
+
   
   GET_LOCK();
 
@@ -791,9 +804,14 @@ cc2420_rssi(void)
     radio_was_off = 1;
     cc2420_on();
   }
-  BUSYWAIT_UNTIL(status() & BV(CC2420_RSSI_VALID), RTIMER_SECOND / 100);
+  BUSYWAIT_UNTIL((stat = status()) & BV(CC2420_RSSI_VALID), RTIMER_SECOND / 100);
 
-  rssi = (int)((signed char)getreg(CC2420_RSSI));
+
+  if(stat & BV(CC2420_RSSI_VALID)){
+    rssi = (int)((signed char)getreg(CC2420_RSSI));
+  } else {
+    rssi = INT_MAX;
+  }
 
   if(radio_was_off) {
     cc2420_off();
