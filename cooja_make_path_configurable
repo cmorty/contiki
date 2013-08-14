@@ -8,10 +8,10 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
  1 file changed, 34 insertions(+), 96 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index fff38cc..46142e2 100644
+index 2d57a42..49b65ae 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
-@@ -248,7 +248,7 @@ public class GUI extends Observable {
+@@ -247,7 +247,7 @@ public class GUI extends Observable {
    public static Properties currentExternalToolsSettings;
  
    private static final String externalToolsSettingNames[] = new String[] {
@@ -20,7 +20,7 @@ index fff38cc..46142e2 100644
      "PATH_APPSEARCH",
  
      "PATH_MAKE",
-@@ -428,20 +428,6 @@ public class GUI extends Observable {
+@@ -427,20 +427,6 @@ public class GUI extends Observable {
          currentProjects.add(new COOJAProject(projectDir));
        }
      }
@@ -41,7 +41,7 @@ index fff38cc..46142e2 100644
  
      /* Parse current extension configuration */
      try {
-@@ -4164,99 +4150,52 @@ public class GUI extends Observable {
+@@ -4140,99 +4126,52 @@ public class GUI extends Observable {
      return file;
    }
  
@@ -174,7 +174,7 @@ index fff38cc..46142e2 100644
      }
    }
  
-@@ -4712,4 +4651,3 @@ public class GUI extends Observable {
+@@ -4688,4 +4627,3 @@ public class GUI extends Observable {
    };
  
  }

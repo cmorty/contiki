@@ -1,5 +1,4 @@
-# This series applies on GIT commit 62cb9a29e61d02733c76b1f43d4f9a8de8d5375f
+# This series applies on GIT commit 0d082207b256065561b95dbd965aea0fdb74d7ac
 cooja_make_path_configurable
 cooja_project_search
-contiki_add-mesh_ready-to-mesh
 cooja_impove_gui_performance

@@ -10,10 +10,10 @@ This improves the performace of Nimbus significantly. Unfortunately it
  1 file changed, 3 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index 214e9cf..dad8f89 100644
+index 9d6acfe..b809a5b 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
-@@ -61,16 +61,13 @@ import java.io.InputStream;
+@@ -60,16 +60,13 @@ import java.io.InputStream;
  import java.io.OutputStream;
  import java.io.PrintStream;
  import java.io.StringReader;

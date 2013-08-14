@@ -4,31 +4,14 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
 
 
 ---
- tools/cooja/java/se/sics/cooja/GUI.java |  117 ++++++++++++++++++++++---------
- 1 file changed, 84 insertions(+), 33 deletions(-)
+ tools/cooja/java/se/sics/cooja/GUI.java |  114 ++++++++++++++++++++++---------
+ 1 file changed, 81 insertions(+), 33 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index 46142e2..214e9cf 100644
+index 49b65ae..9d6acfe 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
-@@ -61,13 +61,16 @@ import java.io.InputStream;
- import java.io.OutputStream;
- import java.io.PrintStream;
- import java.io.StringReader;
-+import java.lang.reflect.Array;
- import java.lang.reflect.InvocationTargetException;
- import java.net.URL;
- import java.net.URLClassLoader;
- import java.security.AccessControlException;
- import java.text.DecimalFormat;
- import java.util.ArrayList;
-+import java.util.Arrays;
- import java.util.Collection;
-+import java.util.Comparator;
- import java.util.Enumeration;
- import java.util.List;
- import java.util.Observable;
-@@ -4150,52 +4153,99 @@ public class GUI extends Observable {
+@@ -4126,52 +4126,99 @@ public class GUI extends Observable {
      return file;
    }
  
@@ -43,13 +26,6 @@ index 46142e2..214e9cf 100644
      try {
 -      File contikiPath = new File(GUI.getExternalToolsSetting("PATH_CONTIKI", null));
 -      String contikiCanonical = contikiPath.getCanonicalPath();
--
--      String fileCanonical = file.getCanonicalPath();
--      if (!fileCanonical.startsWith(contikiCanonical)) {
--        /* File is not in a Contiki subdirectory */
--        /*logger.info("File is not in a Contiki subdirectory: " + file.getAbsolutePath());*/
--        return null;
--      }
 +    	int elem = PATH_IDENTIFIER.length;
 +    	File path[] = new File [elem];
 +    	String canonicals[] = new String[elem];
@@ -75,12 +51,19 @@ index 46142e2..214e9cf 100644
 +      
 +	    if(match == -1) return null;
  
+-      String fileCanonical = file.getCanonicalPath();
+-      if (!fileCanonical.startsWith(contikiCanonical)) {
+-        /* File is not in a Contiki subdirectory */
+-        /*logger.info("File is not in a Contiki subdirectory: " + file.getAbsolutePath());*/
+-        return null;
+-      }
+ 
 -      /* Replace Contiki's canonical path with Contiki identifier */
 -      String portablePath = fileCanonical.replaceFirst(
 -          java.util.regex.Matcher.quoteReplacement(contikiCanonical),
 -          java.util.regex.Matcher.quoteReplacement(PATH_CONTIKI_IDENTIFIER));
 -      File portable = new File(portablePath);
- 
+-
 -      /* Verify conversion */
 -      File verify = restoreContikiRelativePath(portable);
 -      if (verify == null || !verify.exists()) {
@@ -161,7 +144,7 @@ index 46142e2..214e9cf 100644
      }
    }
  
-@@ -4651,3 +4701,4 @@ public class GUI extends Observable {
+@@ -4627,3 +4674,4 @@ public class GUI extends Observable {
    };
  
  }
