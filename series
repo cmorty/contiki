@@ -1,13 +1,5 @@
-# This series applies on GIT commit 59dc241afb6cd46dce4c1f14f1bf239c8be3c00b
-cooja_javascript_warnings
-cooja_apps_clean
-cooja_optimize_build
+# This series applies on GIT commit 62cb9a29e61d02733c76b1f43d4f9a8de8d5375f
 cooja_make_path_configurable
 cooja_project_search
-contiki_symbols_if_needed
-contiki_rime_memfunc
 contiki_add-mesh_ready-to-mesh
 cooja_impove_gui_performance
-cooja_MSPSIM_WarnStream
-cooja_updateGUIComponentState_public
-cooja_contikimote_lqi_rssi

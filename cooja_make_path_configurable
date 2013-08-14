@@ -4,31 +4,14 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
 
 
 ---
- tools/cooja/java/se/sics/cooja/GUI.java |  133 ++++++++-----------------------
- 1 file changed, 34 insertions(+), 99 deletions(-)
+ tools/cooja/java/se/sics/cooja/GUI.java |  130 ++++++++-----------------------
+ 1 file changed, 34 insertions(+), 96 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index 12c0d4b..a42b498 100644
+index fff38cc..46142e2 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
-@@ -60,16 +60,13 @@ import java.io.InputStream;
- import java.io.OutputStream;
- import java.io.PrintStream;
- import java.io.StringReader;
--import java.lang.reflect.Array;
- import java.lang.reflect.InvocationTargetException;
- import java.net.URL;
- import java.net.URLClassLoader;
- import java.security.AccessControlException;
- import java.text.DecimalFormat;
- import java.util.ArrayList;
--import java.util.Arrays;
- import java.util.Collection;
--import java.util.Comparator;
- import java.util.Enumeration;
- import java.util.List;
- import java.util.Observable;
-@@ -247,7 +244,7 @@ public class GUI extends Observable {
+@@ -248,7 +248,7 @@ public class GUI extends Observable {
    public static Properties currentExternalToolsSettings;
  
    private static final String externalToolsSettingNames[] = new String[] {
@@ -37,7 +20,7 @@ index 12c0d4b..a42b498 100644
      "PATH_APPSEARCH",
  
      "PATH_MAKE",
-@@ -427,20 +424,6 @@ public class GUI extends Observable {
+@@ -428,20 +428,6 @@ public class GUI extends Observable {
          currentProjects.add(new COOJAProject(projectDir));
        }
      }
@@ -58,7 +41,7 @@ index 12c0d4b..a42b498 100644
  
      /* Parse current extension configuration */
      try {
-@@ -4136,99 +4119,52 @@ public class GUI extends Observable {
+@@ -4164,99 +4150,52 @@ public class GUI extends Observable {
      return file;
    }
  
@@ -191,7 +174,7 @@ index 12c0d4b..a42b498 100644
      }
    }
  
-@@ -4684,4 +4620,3 @@ public class GUI extends Observable {
+@@ -4712,4 +4651,3 @@ public class GUI extends Observable {
    };
  
  }

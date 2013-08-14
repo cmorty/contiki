@@ -8,10 +8,10 @@ From: Moritz 'Morty' Strübe <morty@gmx.net>
  1 file changed, 84 insertions(+), 33 deletions(-)
 
 diff --git a/tools/cooja/java/se/sics/cooja/GUI.java b/tools/cooja/java/se/sics/cooja/GUI.java
-index a42b498..2e04c10 100644
+index 46142e2..214e9cf 100644
 --- a/tools/cooja/java/se/sics/cooja/GUI.java
 +++ b/tools/cooja/java/se/sics/cooja/GUI.java
-@@ -60,13 +60,16 @@ import java.io.InputStream;
+@@ -61,13 +61,16 @@ import java.io.InputStream;
  import java.io.OutputStream;
  import java.io.PrintStream;
  import java.io.StringReader;
@@ -28,7 +28,7 @@ index a42b498..2e04c10 100644
  import java.util.Enumeration;
  import java.util.List;
  import java.util.Observable;
-@@ -4119,52 +4122,99 @@ public class GUI extends Observable {
+@@ -4150,52 +4153,99 @@ public class GUI extends Observable {
      return file;
    }
  
@@ -161,7 +161,7 @@ index a42b498..2e04c10 100644
      }
    }
  
-@@ -4620,3 +4670,4 @@ public class GUI extends Observable {
+@@ -4651,3 +4701,4 @@ public class GUI extends Observable {
    };
  
  }
