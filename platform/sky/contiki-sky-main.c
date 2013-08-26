@@ -345,10 +345,10 @@ main(int argc, char **argv)
          RF_CHANNEL);
 #endif /* WITH_UIP6 */
 
-#if !WITH_UIP && !WITH_UIP6
+
   uart1_set_input(serial_line_input_byte);
   serial_line_init();
-#endif
+
 
 #if PROFILE_CONF_ON
   profile_init();
