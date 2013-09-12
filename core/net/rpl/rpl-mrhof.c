@@ -94,7 +94,7 @@ calculate_path_metric(rpl_parent_t *p)
 #elif RPL_DAG_MC == RPL_DAG_MC_ETX
     return p->mc.obj.etx + (uint16_t)link_metric;
 #elif RPL_DAG_MC == RPL_DAG_MC_ENERGY
-    return p->mc.obj.energy.energy_test + (uint16_t)link_metric;
+    return p->mc.obj.energy.energy_est + (uint16_t)link_metric;
 #endif /* RPL_DAG_MC */
   }
 }
