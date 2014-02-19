@@ -963,7 +963,7 @@ public class Cooja extends Observable {
         tooltip += description + " (" + newPluginClass.getName() + ")";
 
         /* Check if simulation plugin depends on any particular radio medium */
-        if (pluginType == PluginType.SIM_PLUGIN || pluginType == PluginType.SIM_STANDARD_PLUGIN) {
+        if ((pluginType == PluginType.SIM_PLUGIN || pluginType == PluginType.SIM_STANDARD_PLUGIN) && (getSimulation() != null)) {
           if (newPluginClass.getAnnotation(SupportedArguments.class) != null) {
             boolean active = false;
             Class<? extends RadioMedium>[] radioMediums = newPluginClass.getAnnotation(SupportedArguments.class).radioMediums();
@@ -2639,7 +2639,6 @@ public class Cooja extends Observable {
           mySimulation.addMote(newMote);
         }
       }
-      updateGUIComponentState();
 
     } else {
       logger.warn("No simulation active");
