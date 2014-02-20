@@ -36,7 +36,6 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Random;
-import java.util.WeakHashMap;
 
 import org.apache.log4j.Logger;
 import org.jdom.Element;
@@ -69,8 +68,6 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
 
   private ArrayList<Edge> edges = new ArrayList<Edge>();
   private boolean edgesDirty = true;
-  private WeakHashMap<Radio, Double> baseRssi = new WeakHashMap<Radio, Double>();
-  private WeakHashMap<Radio, Double> sendRssi = new WeakHashMap<Radio, Double>();
 
   /* Used for optimizing lookup time */
   private Hashtable<Radio,DGRMDestinationRadio[]> edgesTable = new Hashtable<Radio,DGRMDestinationRadio[]>();
@@ -147,58 +144,11 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
     }
   }
 
-  
-  /**
-   * Get the RSSI value that is set when there is "silence"
-   * @param radio The radio to get the base RSSI for
-   * @return The base RSSI value; Default: SS_NOTHING
-   */
-  public double getBaseRssi(Radio radio) {
-    Double rssi = baseRssi.get(radio);
-    if(rssi == null) {
-      rssi = SS_NOTHING;
-    }
-    return rssi;
-  }
-  
-  
-  /**
-   * Set the base RSSI for a radio. This value is set when there is "silence"
-   * @param radio The radio to set the RSSI value for
-   * @param rssi The RSSI value to set during silence
-   */
-  public void setBaseRssi(Radio radio, double rssi) {
-    baseRssi.put(radio, rssi);    
-  }
-  
-  /**
-   * Get the minimum RSSI value that is set when the radio is sending
-   * @param radio The radio to get the send RSSI for
-   * @return The send RSSI value; Default: SS_STRONG
-   */
-  public double getSendRssi(Radio radio) {
-    Double rssi = sendRssi.get(radio);
-    if(rssi == null) {
-      rssi = SS_STRONG;
-    }
-    return rssi;
-  }
-  
-  
-  /**
-   * Set the send RSSI for a radio. This is the minimum value when the radio is sending
-   * @param radio The radio to set the RSSI value for
-   * @param rssi The minimum RSSI value to set when sending
-   */
-  public void setSendRssi(Radio radio, double rssi) {
-    sendRssi.put(radio, rssi);    
-  }
-  
-  
+
   
   public void updateSignalStrengths() {
 
-    /* Reset signal strengths (Default: SS_NOTHING*/
+    /* Reset signal strengths (Default: SS_NOTHING) */
     for (Radio radio : getRegisteredRadios()) {
       radio.setCurrentSignalStrength(getBaseRssi(radio));
     }
@@ -363,10 +313,10 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
   }
 
   public Collection<Element> getConfigXML() {
-    ArrayList<Element> config = new ArrayList<Element>();
-    Element element;
+    Collection<Element> config = super.getConfigXML();
 
     for (Edge edge: getEdges()) {
+      Element element;
       element = new Element("edge");
       element.addContent(edge.getConfigXML());
       config.add(element);
@@ -377,6 +327,8 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
 
   private Collection<Element> delayedConfiguration = null;
   public boolean setConfigXML(Collection<Element> configXML, boolean visAvailable) {
+    super.setConfigXML(configXML, visAvailable);
+
     random = simulation.getRandomGenerator();
 
     /* Wait until simulation has been loaded */
@@ -388,6 +340,8 @@ public void simulationFinishedLoading() {
     if (delayedConfiguration == null) {
       return;
     }
+
+    super.simulationFinishedLoading();
 
     boolean oldConfig = false;
     for (Element element : delayedConfiguration) {
