@@ -2,3 +2,5 @@
 Cooja-Make-updateGUIComponentState-public
 add-function-etimer_reset_set
 cooja-allow-setting-rssi-while
+fix-documentation
+fix-backwards-compatibility

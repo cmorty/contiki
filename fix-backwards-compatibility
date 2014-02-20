@@ -1,0 +1,23 @@
+Fix backwards compatibility
+
+From: Moritz 'Morty' Strübe <morty@gmx.net>
+
+
+---
+ .../cooja/radiomediums/DirectedGraphMedium.java    |    3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/tools/cooja/java/org/contikios/cooja/radiomediums/DirectedGraphMedium.java b/tools/cooja/java/org/contikios/cooja/radiomediums/DirectedGraphMedium.java
+index b728bb1..23db83c 100644
+--- a/tools/cooja/java/org/contikios/cooja/radiomediums/DirectedGraphMedium.java
++++ b/tools/cooja/java/org/contikios/cooja/radiomediums/DirectedGraphMedium.java
+@@ -386,6 +386,9 @@ public void simulationFinishedLoading() {
+               if (destClassName == null || destClassName.isEmpty()) {
+                 continue;
+               }
++              /* Backwards compatibility: se.sics -> org.contikios */
++              destClassName = destClassName.replaceFirst("^se\\.sics", "org.contikios");
++              
+               Class<? extends DGRMDestinationRadio> destClass =
+                 simulation.getCooja().tryLoadClass(this, DGRMDestinationRadio.class, destClassName);
+               if (destClass == null) {

@@ -1,0 +1,22 @@
+Fix documentation
+
+From: Moritz 'Morty' Strübe <morty@gmx.net>
+
+
+---
+ .../cooja/contikimote/interfaces/ContikiRadio.java |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tools/cooja/java/org/contikios/cooja/contikimote/interfaces/ContikiRadio.java b/tools/cooja/java/org/contikios/cooja/contikimote/interfaces/ContikiRadio.java
+index 9e9ebb6..ebe24e5 100644
+--- a/tools/cooja/java/org/contikios/cooja/contikimote/interfaces/ContikiRadio.java
++++ b/tools/cooja/java/org/contikios/cooja/contikimote/interfaces/ContikiRadio.java
+@@ -252,7 +252,7 @@ public class ContikiRadio extends Radio implements ContikiMoteInterface, PolledA
+ 
+   /** Set LQI to a value between 0 and 255.
+    * 
+-   * @see se.sics.cooja.interfaces.Radio#setLQI(int)
++   * @see org.contikios.cooja.interfaces.Radio#setLQI(int)
+    */
+   public void setLQI(int lqi){
+     if(lqi<0) {
