@@ -1,0 +1,62 @@
+Add function etimer_reset_set.
+
+From: Moritz 'Morty' Strübe <morty@gmx.net>
+
+This new function is similar to reset, but allows to also set a new
+timeout. Thus long-term accuracy with changing timeouts is now possible.
+---
+ core/sys/etimer.c |   10 ++++++++++
+ core/sys/etimer.h |   12 ++++++++++++
+ 2 files changed, 22 insertions(+)
+
+diff --git a/core/sys/etimer.c b/core/sys/etimer.c
+index 34917aa..b316517 100644
+--- a/core/sys/etimer.c
++++ b/core/sys/etimer.c
+@@ -180,6 +180,16 @@ etimer_set(struct etimer *et, clock_time_t interval)
+   add_timer(et);
+ }
+ /*---------------------------------------------------------------------------*/
++
++void
++etimer_reset_set(struct etimer *et, clock_time_t interval)
++{
++  timer_reset(&et->timer);
++  et->timer.interval = interval;
++  add_timer(et);
++}
++/*---------------------------------------------------------------------------*/
++
+ void
+ etimer_reset(struct etimer *et)
+ {
+diff --git a/core/sys/etimer.h b/core/sys/etimer.h
+index 10452dc..88e8e0f 100644
+--- a/core/sys/etimer.h
++++ b/core/sys/etimer.h
+@@ -129,6 +129,13 @@ CCIF void etimer_reset(struct etimer *et);
+  *
+  * \sa etimer_reset()
+  */
++
++
++
++void etimer_reset_set(struct etimer *et, clock_time_t interval);
++
++
++
+ void etimer_restart(struct etimer *et);
+ 
+ /**
+@@ -182,6 +189,11 @@ clock_time_t etimer_start_time(struct etimer *et);
+  */
+ CCIF int etimer_expired(struct etimer *et);
+ 
++
++
++
++
++
+ /**
+  * \brief      Stop a pending event timer.
+  * \param et   A pointer to the pending event timer.
