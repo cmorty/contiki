@@ -386,6 +386,9 @@ public void simulationFinishedLoading() {
               if (destClassName == null || destClassName.isEmpty()) {
                 continue;
               }
+              /* Backwards compatibility: se.sics -> org.contikios */
+              destClassName = destClassName.replaceFirst("^se\\.sics", "org.contikios");
+              
               Class<? extends DGRMDestinationRadio> destClass =
                 simulation.getCooja().tryLoadClass(this, DGRMDestinationRadio.class, destClassName);
               if (destClass == null) {
