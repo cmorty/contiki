@@ -1,6 +1,5 @@
-# This series applies on GIT commit f3657cbfda321b874ae44602a23fd7970e599027
+# This series applies on GIT commit 9e45335c714e1832a8cf5d9efbc7c0c5ecee4fb1
 Cooja-Make-updateGUIComponentState-public
 add-function-etimer_reset_set
 cooja-allow-setting-rssi-while
-fix-documentation
-fix-backwards-compatibility
+cooja-also-remove-uninitialized-mote

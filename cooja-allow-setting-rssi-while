@@ -450,7 +450,7 @@ index 742dbea..0aed97d 100644
  
  }
 diff --git a/tools/cooja/java/org/contikios/cooja/radiomediums/DirectedGraphMedium.java b/tools/cooja/java/org/contikios/cooja/radiomediums/DirectedGraphMedium.java
-index c9bac3f..b728bb1 100644
+index 48d90a0..23db83c 100644
 --- a/tools/cooja/java/org/contikios/cooja/radiomediums/DirectedGraphMedium.java
 +++ b/tools/cooja/java/org/contikios/cooja/radiomediums/DirectedGraphMedium.java
 @@ -144,21 +144,23 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
