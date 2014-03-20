@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, Texas Instruments Incorporated - http://www.ti.com/
+ * Copyright (c) 2014, University of Bristol - http://www.bris.ac.uk
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,7 +10,6 @@
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- *
  * 3. Neither the name of the copyright holder nor the names of its
  *    contributors may be used to endorse or promote products derived
  *    from this software without specific prior written permission.
@@ -29,64 +28,22 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 /**
- * \addtogroup cc2538
- * @{
- *
- * \defgroup cc2538-ieee-addr cc2538 IEEE Address Control
- *
- * Driver for the retrieval of an IEEE address from flash
- * @{
- *
  * \file
- * Header file with register and macro declarations for the cc2538 IEEE address
- * driver
- */
-#ifndef IEEE_ADDR_H_
-#define IEEE_ADDR_H_
-
-#include "contiki-conf.h"
-
-#include <stdint.h>
-/*---------------------------------------------------------------------------*/
-/**
- * \name IEEE address locations
- * @{
- */
-#define IEEE_ADDR_LOCATION_PRIMARY   0x00280028 /**< IEEE address location */
-#define IEEE_ADDR_LOCATION_SECONDARY 0x0027FFCC /**< IEEE address location */
-/** @} */
-/*---------------------------------------------------------------------------*/
-/**
- * \brief Select which address location to use
- * @{
- */
-#if IEEE_ADDR_CONF_USE_SECONDARY_LOCATION
-#define IEEE_ADDR_LOCATION IEEE_ADDR_LOCATION_SECONDARY
-#else
-#define IEEE_ADDR_LOCATION IEEE_ADDR_LOCATION_PRIMARY
-#endif
-/** @} */
-/*---------------------------------------------------------------------------*/
-/*
- * \brief Copy the node's IEEE address to a destination memory area
- * \param dst A pointer to the destination area where the IEEE address is to be
- *            written
- * \param len The number of bytes to write to destination area
+ *         IPv6 multicast forwarding stats maintenance
  *
- * The address will be read from an InfoPage location or a hard-coded address
- * will be used, depending on the value of configuration parameter
- * IEEE_ADDR_CONF_HARDCODED
- *
- * This function will copy \e len LS bytes
- *
- * The destination address will be populated with dst[0] holding the MSB and
- * dst[len - 1] holding the LSB
+ * \author
+ *         George Oikonomou - <oikonomou@users.sourceforge.net>
  */
-void ieee_addr_cpy_to(uint8_t *dst, uint8_t len);
+#include "net/ipv6/multicast/uip-mcast6-stats.h"
 
-#endif /* IEEE_ADDR_H_ */
-
-/**
- * @}
- * @}
- */
+#include <string.h>
+/*---------------------------------------------------------------------------*/
+uip_mcast6_stats_t uip_mcast6_stats;
+/*---------------------------------------------------------------------------*/
+void
+uip_mcast6_stats_init(void *stats)
+{
+  memset(&uip_mcast6_stats, 0, sizeof(uip_mcast6_stats));
+  uip_mcast6_stats.engine_stats = stats;
+}
+/*---------------------------------------------------------------------------*/

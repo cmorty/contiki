@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, Texas Instruments Incorporated - http://www.ti.com/
+ * Copyright (c) 2011, Loughborough University - Computer Science
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,64 +29,47 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 /**
- * \addtogroup cc2538
- * @{
- *
- * \defgroup cc2538-ieee-addr cc2538 IEEE Address Control
- *
- * Driver for the retrieval of an IEEE address from flash
- * @{
- *
  * \file
- * Header file with register and macro declarations for the cc2538 IEEE address
- * driver
+ *     Multicast routing table manipulation
+ *
+ * \author
+ *     George Oikonomou - <oikonomou@users.sourceforge.net>
  */
-#ifndef IEEE_ADDR_H_
-#define IEEE_ADDR_H_
+#ifndef UIP_MCAST6_ROUTE_H_
+#define UIP_MCAST6_ROUTE_H_
 
-#include "contiki-conf.h"
+#include "contiki.h"
+#include "net/ip/uip.h"
 
 #include <stdint.h>
 /*---------------------------------------------------------------------------*/
-/**
- * \name IEEE address locations
- * @{
- */
-#define IEEE_ADDR_LOCATION_PRIMARY   0x00280028 /**< IEEE address location */
-#define IEEE_ADDR_LOCATION_SECONDARY 0x0027FFCC /**< IEEE address location */
-/** @} */
+/** \brief An entry in the multicast routing table */
+typedef struct uip_mcast6_route {
+  struct uip_mcast6_route *next;
+  uip_ipaddr_t group;
+  uint32_t lifetime; /* seconds */
+  void *dag; /* Pointer to an rpl_dag_t struct */
+} uip_mcast6_route_t;
+/*---------------------------------------------------------------------------*/
+/** \name Multicast Routing Table Manipulation */
+/** @{ */
+uip_mcast6_route_t *uip_mcast6_route_lookup(uip_ipaddr_t *group);
+uip_mcast6_route_t *uip_mcast6_route_add(uip_ipaddr_t *group);
+void uip_mcast6_route_rm(uip_mcast6_route_t *defrt);
+int uip_mcast6_route_count(void);
+uip_mcast6_route_t *uip_mcast6_route_list_head(void);
 /*---------------------------------------------------------------------------*/
 /**
- * \brief Select which address location to use
- * @{
+ * \brief Multicast routing table init routine
+ *
+ *        Multicast routing tables are not necessarily required by all
+ *        multicast engines. For instance, trickle multicast does not rely on
+ *        the existence of a routing table. Therefore, this function here
+ *        should be invoked by each engine's init routine only if the relevant
+ *        functionality is required. This is also why this function should not
+ *        get hooked into the uip-ds6 core.
  */
-#if IEEE_ADDR_CONF_USE_SECONDARY_LOCATION
-#define IEEE_ADDR_LOCATION IEEE_ADDR_LOCATION_SECONDARY
-#else
-#define IEEE_ADDR_LOCATION IEEE_ADDR_LOCATION_PRIMARY
-#endif
+void uip_mcast6_route_init(void);
 /** @} */
-/*---------------------------------------------------------------------------*/
-/*
- * \brief Copy the node's IEEE address to a destination memory area
- * \param dst A pointer to the destination area where the IEEE address is to be
- *            written
- * \param len The number of bytes to write to destination area
- *
- * The address will be read from an InfoPage location or a hard-coded address
- * will be used, depending on the value of configuration parameter
- * IEEE_ADDR_CONF_HARDCODED
- *
- * This function will copy \e len LS bytes
- *
- * The destination address will be populated with dst[0] holding the MSB and
- * dst[len - 1] holding the LSB
- */
-void ieee_addr_cpy_to(uint8_t *dst, uint8_t len);
 
-#endif /* IEEE_ADDR_H_ */
-
-/**
- * @}
- * @}
- */
+#endif /* UIP_MCAST6_ROUTE_H_ */
