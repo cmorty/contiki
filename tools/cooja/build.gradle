@@ -1,0 +1,140 @@
+allprojects {
+    apply plugin: 'java'
+
+        repositories {
+            jcenter()
+        }
+
+}
+
+// TODO: Currently disable to avoid having too much logs in travis
+//apply plugin: 'checkstyle'
+apply plugin: 'application'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+dependencies {
+    compile 'log4j:log4j:1.2.16'
+        compile 'de.sciss:jsyntaxpane:1.0.0'
+        compile 'org.jdom:jdom:1.1'
+        compile 'org.swinglabs.swingx:swingx-all:1.6.4'
+}
+
+mainClassName = "org.contikios.cooja.Cooja"
+libsDirName = "../dist"
+
+sourceSets {
+    main {
+        java {
+            srcDir 'java'
+        }
+        resources {
+            srcDir 'config'
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': "org.contikios.cooja.Cooja"
+    }
+}
+
+run {
+    maxHeapSize "512m"
+    main = "org.contikios.cooja.Cooja"
+    workingDir = "build"
+}
+
+task help << {
+  println """
+The COOJA Simulator
+
+  Start COOJA
+  > gradle run
+  Build COOJA (dist/cooja.jar) and all default projects (MSPSim et al)
+  > gradle jar
+
+  Start COOJA with more memory allocated (for large simulations)
+  > gradle run_bigmem
+  Start COOJA, show error box if process terminates unexpectedly.
+  > gradle run_errorbox
+
+  Start COOJA and immediately load simulation in sim.csc
+  > java -mx512m -jar dist/cooja.jar -quickstart=sim.csc
+  Start COOJA without GUI and run simulation in sim.csc
+  > java -mx512m -jar dist/cooja.jar -nogui=sim.csc
+
+  Build executable simulation JAR from mysim.csc
+  > gradle export-jar -DCSC="c:/mysim.csc"
+    or
+  > gradle export-jar -DCSC="/home/user/sim.csc"
+    The output JAR is saved to exported.jar
+
+"""
+}
+
+task run_64(dependsOn: jar, type: JavaExec) {
+    description = "Will run the cooja simulator for 64 architecture"
+    main = "org.contikios.cooja.Cooja"
+    workingDir = "build"
+    maxHeapSize = "512m"
+    systemProperty "user.language", "en"
+    jvmArgs "-d64", "-XX:+ShowMessageBoxOnError"
+}
+
+task run_errorbox(dependsOn: jar, type: JavaExec) {
+    description = ""
+    main = "org.contikios.cooja.Cooja"
+    workingDir = "build"
+    maxHeapSize = "512m"
+    systemProperty "user.language", "en"
+    jvmArgs "-XX:+ShowMessageBoxOnError"
+}
+
+task runprof(dependsOn: jar, type: JavaExec) {
+    description = ""
+    main = "org.contikios.cooja.Cooja"
+    workingDir = "build"
+    jvmArgs "-agentlib:yjpagent"
+}
+
+task runfree(dependsOn: jar, type: JavaExec) {
+    description = ""
+    main = "org.contikios.cooja.Cooja"
+    workingDir = "build"
+    maxHeapSize = "1536m"
+}
+
+task run_bigmem(dependsOn: jar, type: JavaExec) {
+    description = "Run the simulation with a larger Java memory heap"
+    main = "org.contikios.cooja.Cooja"
+    workingDir = "build"
+    maxHeapSize = "1536m"
+}
+
+task run_nogui(dependsOn: jar, type: JavaExec) {
+    description = "Run the simulation without graphical interface"
+    // <arg line="-nogui=${args}"/>
+    main = "org.contikios.cooja.Cooja"
+    workingDir = "build"
+    maxHeapSize = "512m"
+}
+
+task run_applet(dependsOn: jar, type: JavaExec) {
+    description = "Run the simulation as an applet"
+    //    <exec executable="appletviewer" dir="${build}">
+    //      <arg value="-J-Djava.security.policy=cooja.policy"/>
+    //      <arg value="cooja.html"/>
+    //      <env key="CLASSPATH" path="${build}"/>
+    //    </exec>
+}
+
+task export_jar(dependsOn: jar, type: JavaExec) {
+    description = "Export the complete simulation in a single JAR"
+    maxHeapSize "512m"
+    main "org.contikios.cooja.util.ExecuteJAR"
+    workingDir = "build"
+    // <arg file="${CSC}"/>
+    // <arg file="exported.jar"/>
+}
