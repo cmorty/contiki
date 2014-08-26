@@ -3,7 +3,7 @@ apply plugin: "java"
 sourceSets {
     main {
         java {
-            srcDir 'java'
+            srcDir 'src'
         }
     }
 }
@@ -33,7 +33,7 @@ compileJava.dependsOn copyCoffeeJar
 compileJava.dependsOn copyJipv6Jar
 
 repositories {
-    jcenter()
+   jcenter()
    flatDir {
        dirs 'lib'
    }
@@ -52,6 +52,9 @@ jar {
 libsDirName = "../lib"
 
 dependencies {
+    compile name: 'mspsim'
+    compile name: 'coffee'
+    compile name: 'jipv6'
     compile project(":")
     compile 'log4j:log4j:1.2.16'
     compile 'org.jdom:jdom:1.1'
