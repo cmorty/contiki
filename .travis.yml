@@ -6,12 +6,7 @@ before_script:
   - sudo apt-get -qq update
 
   ## Install msp430 toolchain
-  - sudo apt-get -qq install lib32z1
-  - $WGET http://adamdunkels.github.io/contiki-fork/mspgcc-4.7.0-compiled.tar.bz2 &&
-    tar xjf mspgcc*.tar.bz2 -C /tmp/ &&
-    sudo cp -f -r /tmp/msp430/* /usr/local/ &&
-    rm -rf /tmp/msp430 mspgcc*.tar.bz2 &&
-    msp430-gcc --version
+  - sudo apt-get -qq install gcc-msp430
 
   ## Install avr toolchain
   - sudo apt-get -qq install gcc-avr avr-libc
@@ -86,23 +81,5 @@ after_script:
 env:
   ## This magically kick-off parallel jobs for each of the for the sets
   ## of environment variable defined below
-  - BUILD_TYPE='compile-base' BUILD_CATEGORY='compile'
-  - BUILD_TYPE='collect'
-  - BUILD_TYPE='collect-lossy'
-  - BUILD_TYPE='rpl'
   - BUILD_TYPE='rime'
-  - BUILD_TYPE='ipv6'
-  - BUILD_TYPE='hello-world'
-  - BUILD_TYPE='base'
-# XXX: netperf disabled b/c it's flaky
-#  - BUILD_TYPE='netperf' MAKE_TARGETS='cooja'
-  - BUILD_TYPE='shell'
-  - BUILD_TYPE='elfloader'
-# Tests under the ipv4 dir are individually disabled. Thus the entire job can be off
-#  - BUILD_TYPE='ipv4'
-  - BUILD_TYPE='ipv6-apps'
-  - BUILD_TYPE='compile-8051-ports' BUILD_CATEGORY='compile' BUILD_ARCH='8051'
-  - BUILD_TYPE='compile-arm-apcs-ports' BUILD_CATEGORY='compile' BUILD_ARCH='arm-apcs'
-  - BUILD_TYPE='compile-6502-ports' BUILD_CATEGORY='compile' BUILD_ARCH='6502'
-  - BUILD_TYPE='compile-arm-ports' BUILD_CATEGORY='compile' BUILD_ARCH='arm'
-  - BUILD_TYPE='slip-radio' MAKE_TARGETS='cooja'
+
