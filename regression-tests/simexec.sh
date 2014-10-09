@@ -58,6 +58,8 @@ while (( "$#" )); do
 		echo "==== COOJA.log ====" ; cat COOJA.log; 
 		echo "==== COOJA.testlog ====" ; cat COOJA.testlog; 
 		echo "==== Files used for simulation (sha1sum) ===="
+		echo -n "Contiki Version: " 
+		git describe --tags
 		grep "Loading firmware from:"  COOJA.log | cut -d " " -f 10 | uniq  | xargs sha1sum
 	else  
 		tail -50 COOJA.log ; 
