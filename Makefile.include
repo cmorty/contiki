@@ -37,9 +37,9 @@ endif
 
 #More debug information when running in CI
 ifdef CI
-	ifeq($(CI), "true")
-		V := 1
-	fi
+  ifeq ($(CI),true)
+    V = 1
+  endif
 endif
 
 
