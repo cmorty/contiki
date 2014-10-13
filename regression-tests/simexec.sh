@@ -42,7 +42,7 @@ while (( "$#" )); do
 
 	if [ $JRV -eq 0 ] ; then
 		touch COOJA.testlog; 
-		mv COOJA.testlog $BASENAME.testlog 
+#		mv COOJA.testlog $BASENAME.testlog 
 		echo " OK"
 #		exit 0
 	fi
