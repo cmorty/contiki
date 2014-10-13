@@ -44,7 +44,7 @@ while (( "$#" )); do
 		touch COOJA.testlog; 
 		mv COOJA.testlog $BASENAME.testlog 
 		echo " OK"
-		exit 0
+#		exit 0
 	fi
 
 
