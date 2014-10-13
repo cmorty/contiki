@@ -25,8 +25,9 @@
       <identifier>sky1</identifier>
       <description>Sky Mote Type #1</description>
       <source EXPORT="discard">[CONTIKI_DIR]/examples/rime/example-trickle.c</source>
-      <commands EXPORT="discard">make clean TARGET=blub
-make example-trickle.sky TARGET=blubber</commands>
+      <commands EXPORT="discard">make clean TARGET=sky
+make example-trickle.sky TARGET=sky
+false</commands>
       <firmware EXPORT="copy">[CONTIKI_DIR]/examples/rime/example-trickle.sky</firmware>
       <moteinterface>org.contikios.cooja.interfaces.Position</moteinterface>
       <moteinterface>org.contikios.cooja.interfaces.IPAddress</moteinterface>
