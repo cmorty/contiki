@@ -36,8 +36,10 @@ ifndef HOST_OS
 endif
 
 #More debug information when running in CI
-ifeq($(CI), true)
-	V=1
+ifdef CI
+	ifeq($(CI), "true")
+		V := 1
+	fi
 endif
 
 
