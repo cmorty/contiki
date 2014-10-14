@@ -70,7 +70,7 @@ before_script:
     fi
 
   ## Give debug information
-  - echo - "Contiki will be compiled with RELSTR=" ; git --git-dir .git describe --tags --always
+  - echo -n "Contiki will be compiled with RELSTR=" ; git --git-dir .git describe --tags --always
 
 script:
   ## regression-tests/Makefile handles most of generic logic
