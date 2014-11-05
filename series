@@ -1,5 +1,4 @@
-# This series applies on GIT commit 9e45335c714e1832a8cf5d9efbc7c0c5ecee4fb1
+# This series applies on GIT commit c9605a03567a6e336ed0ba1f09397dd5a3f5dfb9
 Cooja-Make-updateGUIComponentState-public
 add-function-etimer_reset_set
-cooja-allow-setting-rssi-while
-cooja-also-remove-uninitialized-mote
+sky-initialize-energest-as-ear

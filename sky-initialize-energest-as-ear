@@ -1,0 +1,40 @@
+sky: Initialize energest as early as possible
+
+From: Moritz 'Morty' Strübe <morty@gmx.net>
+
+
+---
+ platform/sky/contiki-sky-main.c |   11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/platform/sky/contiki-sky-main.c b/platform/sky/contiki-sky-main.c
+index d589ca0..67a263a 100644
+--- a/platform/sky/contiki-sky-main.c
++++ b/platform/sky/contiki-sky-main.c
+@@ -279,9 +279,17 @@ main(int argc, char **argv)
+ 
+   leds_off(LEDS_RED);
+   rtimer_init();
++
+   /*
+-   * Hardware initialization done!
++     * Hardware initialization done!
++     */
++
++
++  /* Initialize energest fist (but after rtimer)
+    */
++  energest_init();
++  ENERGEST_ON(ENERGEST_TYPE_CPU);
++
+ 
+   /* Initialize energest first (but after rtimer)
+    */
+@@ -315,6 +323,7 @@ main(int argc, char **argv)
+ 
+   ctimer_init();
+ 
++
+ #if WITH_UIP
+   slip_arch_init(BAUD2UBR(115200));
+ #endif /* WITH_UIP */
