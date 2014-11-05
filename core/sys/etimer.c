@@ -191,6 +191,14 @@ etimer_reset_set(struct etimer *et, clock_time_t interval)
 /*---------------------------------------------------------------------------*/
 
 void
+etimer_reset_with_new_interval(struct etimer *et, clock_time_t interval)
+{
+  timer_reset(&et->timer);
+  et->timer.interval = interval;
+  add_timer(et);
+}
+/*---------------------------------------------------------------------------*/
+void
 etimer_reset(struct etimer *et)
 {
   timer_reset(&et->timer);
