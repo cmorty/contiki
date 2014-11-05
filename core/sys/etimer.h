@@ -142,13 +142,6 @@ void etimer_reset_with_new_interval(struct etimer *et, clock_time_t interval);
  *
  * \sa etimer_reset()
  */
-
-
-
-void etimer_reset_set(struct etimer *et, clock_time_t interval);
-
-
-
 void etimer_restart(struct etimer *et);
 
 /**
@@ -201,11 +194,6 @@ clock_time_t etimer_start_time(struct etimer *et);
  *             returns true or false depending on its status.
  */
 CCIF int etimer_expired(struct etimer *et);
-
-
-
-
-
 
 /**
  * \brief      Stop a pending event timer.
