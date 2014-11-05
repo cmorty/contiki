@@ -1,0 +1,25 @@
+[MSP430] Add gstabs debug information (dwarf is broken)
+
+From: Moritz 'Morty' Strübe <morty@gmx.net>
+
+Currently there is an linker error when compiling with debug information.
+This is only the case for dwarf (the default). Everything is fine with
+stabs, thus allowing to debug and use all the other nice tools like
+"objdump -S".
+---
+ cpu/msp430/Makefile.msp430 |    2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/cpu/msp430/Makefile.msp430 b/cpu/msp430/Makefile.msp430
+index 182cd19..27aea66 100644
+--- a/cpu/msp430/Makefile.msp430
++++ b/cpu/msp430/Makefile.msp430
+@@ -4,6 +4,8 @@ ifdef nodeid
+ CFLAGS += -DNODEID=$(nodeid)
+ endif
+ 
++CFLAGS += -gstabs+
++
+ .SUFFIXES:
+ 
+ ### Define the CPU directory
