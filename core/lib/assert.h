@@ -45,4 +45,7 @@ void _xassert(const char *, int);
 #define __CTASSERT(x, y)        typedef char __assert ## y[(x) ? 1 : -1]
 #endif
 
+#define COMPILE_TIME_ASSERT(pred) switch(0){case 0:case pred:;}
+
+
 #endif /* ASSERT_H_ */
