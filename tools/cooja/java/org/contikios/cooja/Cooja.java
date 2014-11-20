@@ -665,7 +665,7 @@ public class Cooja extends Observable {
   /**
    * Enables/disables menues and menu items depending on whether a simulation is loaded etc.
    */
-  void updateGUIComponentState() {
+  public void updateGUIComponentState() {
     if (!isVisualized()) {
       return;
     }
