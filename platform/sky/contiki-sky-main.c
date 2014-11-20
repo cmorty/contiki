@@ -279,9 +279,17 @@ main(int argc, char **argv)
 
   leds_off(LEDS_RED);
   rtimer_init();
+
   /*
-   * Hardware initialization done!
+     * Hardware initialization done!
+     */
+
+
+  /* Initialize energest fist (but after rtimer)
    */
+  energest_init();
+  ENERGEST_ON(ENERGEST_TYPE_CPU);
+
 
   /* Initialize energest first (but after rtimer)
    */
@@ -314,6 +322,7 @@ main(int argc, char **argv)
   process_start(&etimer_process, NULL);
 
   ctimer_init();
+
 
 #if WITH_UIP
   slip_arch_init(BAUD2UBR(115200));
