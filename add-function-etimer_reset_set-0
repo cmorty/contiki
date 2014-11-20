@@ -10,7 +10,7 @@ timeout. Thus long-term accuracy with changing timeouts is now possible.
  2 files changed, 21 insertions(+)
 
 diff --git a/core/sys/etimer.c b/core/sys/etimer.c
-index 34917aa..499d131 100644
+index 7194011..17ac742 100644
 --- a/core/sys/etimer.c
 +++ b/core/sys/etimer.c
 @@ -181,6 +181,14 @@ etimer_set(struct etimer *et, clock_time_t interval)
@@ -29,7 +29,7 @@ index 34917aa..499d131 100644
  {
    timer_reset(&et->timer);
 diff --git a/core/sys/etimer.h b/core/sys/etimer.h
-index 10452dc..c97ade7 100644
+index b1f57b0..ebbcfc7 100644
 --- a/core/sys/etimer.h
 +++ b/core/sys/etimer.h
 @@ -115,6 +115,19 @@ CCIF void etimer_set(struct etimer *et, clock_time_t interval);

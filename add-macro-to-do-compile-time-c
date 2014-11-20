@@ -1,0 +1,115 @@
+Add macro to do compile time checks on the ringbuf buffer sizes.
+
+From: Moritz 'Morty' Strübe <morty@gmx.net>
+
+
+---
+ core/dev/serial-line.c    |    2 +-
+ core/lib/ringbuf.h        |   22 +++++++++++++++++++++-
+ cpu/msp430/f1xxx/uart1.c  |    2 +-
+ cpu/msp430/f2xxx/uart0.c  |    2 +-
+ cpu/stm32w108/dev/uart1.c |    2 +-
+ 5 files changed, 25 insertions(+), 5 deletions(-)
+
+diff --git a/core/dev/serial-line.c b/core/dev/serial-line.c
+index 6c54331..86e794e 100644
+--- a/core/dev/serial-line.c
++++ b/core/dev/serial-line.c
+@@ -131,7 +131,7 @@ PROCESS_THREAD(serial_line_process, ev, data)
+ void
+ serial_line_init(void)
+ {
+-  ringbuf_init(&rxbuf, rxbuf_data, sizeof(rxbuf_data));
++  RINGBUF_INIT(&rxbuf, rxbuf_data);
+   process_start(&serial_line_process, NULL);
+ }
+ /*---------------------------------------------------------------------------*/
+diff --git a/core/lib/ringbuf.h b/core/lib/ringbuf.h
+index f49acc2..6271df8 100644
+--- a/core/lib/ringbuf.h
++++ b/core/lib/ringbuf.h
+@@ -55,6 +55,7 @@
+ #define RINGBUF_H_
+ 
+ #include "contiki-conf.h"
++#include "assert.h"
+ 
+ /**
+  * \brief      Structure that holds the state of a ring buffer.
+@@ -78,17 +79,36 @@ struct ringbuf {
+  * \param r    A pointer to a struct ringbuf to hold the state of the ring buffer
+  * \param a    A pointer to an array to hold the data in the buffer
+  * \param size_power_of_two The size of the ring buffer, which must be a power of two
++ * \sa RINGBUF_INIT
+  *
+  *             This function initiates a ring buffer. The data in the
+  *             buffer is stored in an external array, to which a
+  *             pointer must be supplied. The size of the ring buffer
+  *             must be a power of two and cannot be larger than 128
+- *             bytes.
++ *             bytes. If possible use the \ref RINGBUF_INIT macro.
+  *
+  */
+ void    ringbuf_init(struct ringbuf *r, uint8_t *a,
+ 		     uint8_t size_power_of_two);
+ 
++
++/**
++ * \brief      Initialize a ring buffer with compile time checks
++ * @param r    A pointer to a struct ringbuf to hold the state of the ring buffer
++ * @param b    A pointer to an array to hold the data in the buffer - must be a power of two
++ * @sa ringbuf_init
++ *
++ *             This macro calls rinbuf_init(), but does some compile time checks whether your
++ *             buffer meets the criteria by \ref ringbuf_init. At least when using GCC.
++ */
++
++#define RINGBUF_INIT(r, b) do {\
++  COMPILE_TIME_ASSERT(sizeof(b) <= 128); \
++  COMPILE_TIME_ASSERT((sizeof(b) & (sizeof(b) -1)) == 0); \
++  ringbuf_init(r, b, sizeof(b));\
++} while(0)
++
++
+ /**
+  * \brief      Insert a byte into the ring buffer
+  * \param r    A pointer to a struct ringbuf to hold the state of the ring buffer
+diff --git a/cpu/msp430/f1xxx/uart1.c b/cpu/msp430/f1xxx/uart1.c
+index 946d272..4514746 100644
+--- a/cpu/msp430/f1xxx/uart1.c
++++ b/cpu/msp430/f1xxx/uart1.c
+@@ -215,7 +215,7 @@ uart1_init(unsigned long ubr)
+ 
+   IE2 |= URXIE1;                        /* Enable USART1 RX interrupt  */
+ #if TX_WITH_INTERRUPT
+-  ringbuf_init(&txbuf, txbuf_data, sizeof(txbuf_data));
++  RINGBUF_INIT(&txbuf, txbuf_data);
+   IE2 |= UTXIE1;                        /* Enable USART1 TX interrupt  */
+ #endif /* TX_WITH_INTERRUPT */
+ 
+diff --git a/cpu/msp430/f2xxx/uart0.c b/cpu/msp430/f2xxx/uart0.c
+index 0a17636..69ab178 100644
+--- a/cpu/msp430/f2xxx/uart0.c
++++ b/cpu/msp430/f2xxx/uart0.c
+@@ -132,7 +132,7 @@ uart0_init(unsigned long ubr)
+   IE2 |= UCA0RXIE;                        /* Enable UCA0 RX interrupt */
+   /* Enable USCI_A0 TX interrupts (if TX_WITH_INTERRUPT enabled) */
+ #if TX_WITH_INTERRUPT
+-  ringbuf_init(&txbuf, txbuf_data, sizeof(txbuf_data));
++  RINGBUF_INIT(&txbuf, txbuf_data);
+   IE2 |= UCA0TXIE;                        /* Enable UCA0 TX interrupt */
+ #endif /* TX_WITH_INTERRUPT */
+ }
+diff --git a/cpu/stm32w108/dev/uart1.c b/cpu/stm32w108/dev/uart1.c
+index 87b05e4..4e7a2be 100644
+--- a/cpu/stm32w108/dev/uart1.c
++++ b/cpu/stm32w108/dev/uart1.c
+@@ -159,7 +159,7 @@ uart1_init(unsigned long ubr)
+   transmitting = 0;
+ 
+ #if TX_WITH_INTERRUPT
+-  ringbuf_init(&txbuf, txbuf_data, sizeof(txbuf_data));
++  RINGBUF_INIT(&txbuf, txbuf_data);
+ #endif /* TX_WITH_INTERRUPT */
+ 
+   INT_SC1FLAG = 0xFFFF;

@@ -9,7 +9,7 @@ updated otherwise.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/tools/cooja/java/org/contikios/cooja/Cooja.java b/tools/cooja/java/org/contikios/cooja/Cooja.java
-index d053fd4..6363c54 100644
+index c131e3e..6a06c30 100644
 --- a/tools/cooja/java/org/contikios/cooja/Cooja.java
 +++ b/tools/cooja/java/org/contikios/cooja/Cooja.java
 @@ -665,7 +665,7 @@ public class Cooja extends Observable {

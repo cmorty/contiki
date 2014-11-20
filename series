@@ -1,6 +1,8 @@
-# This series applies on GIT commit c9605a03567a6e336ed0ba1f09397dd5a3f5dfb9
+# This series applies on GIT commit be4d0b58c03e4ee5f321aa70b9af83a354219784
 Cooja-Make-updateGUIComponentState-public
 sky-initialize-energest-as-ear
 msp430-add-gstabs-debug-inform
 add-function-etimer_reset_set-0
 revert-cc2420-added-rssi_offse
+support-compile-time-assert
+add-macro-to-do-compile-time-c
