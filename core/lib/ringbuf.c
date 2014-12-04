@@ -38,6 +38,8 @@
  */
 
 #include "lib/ringbuf.h"
+#include "contiki-macros.h"
+
 /*---------------------------------------------------------------------------*/
 void
 ringbuf_init(struct ringbuf *r, uint8_t *dataptr, uint8_t size)
@@ -63,8 +65,13 @@ ringbuf_put(struct ringbuf *r, uint8_t c)
   if(((r->put_ptr - r->get_ptr) & r->mask) == r->mask) {
     return 0;
   }
-  r->data[r->put_ptr] = c;
-  r->put_ptr = (r->put_ptr + 1) & r->mask;
+  /*
+   * Order musst be ensured, as theoretically the compiler is allowed to reorder
+   * the access.
+   * In this case a reader might read the memory before c is written.
+   */
+  ACCESS_ONCE(r->data[r->put_ptr]) = c;
+  ACCESS_ONCE(r->put_ptr) = (r->put_ptr + 1) & r->mask;
   return 1;
 }
 /*---------------------------------------------------------------------------*/
@@ -84,8 +91,16 @@ ringbuf_get(struct ringbuf *r)
      most platforms, but C does not guarantee this.
   */
   if(((r->put_ptr - r->get_ptr) & r->mask) > 0) {
-    c = r->data[r->get_ptr];
-    r->get_ptr = (r->get_ptr + 1) & r->mask;
+    /*
+     * Order musst be ensured, as theoretically the compiler is allowed to reorder
+     * the access.
+     * In this case the memory might be freed by increasing get_prt before c was
+     * written.
+     * Here it would even make sense, because one of the registers used for put_ptr
+     * and mask can be reused to save c.
+     */
+    c = ACCESS_ONCE(r->data[r->get_ptr]);
+    ACCESS_ONCE(r->get_ptr) = (r->get_ptr + 1) & r->mask;
     return c;
   } else {
     return -1;
