@@ -126,3 +126,4 @@ env:
   - BUILD_TYPE='compile-arm-ports' BUILD_CATEGORY='compile' BUILD_ARCH='arm-aapcs'
   - BUILD_TYPE='slip-radio' MAKE_TARGETS='cooja'
   - BUILD_TYPE='llsec' MAKE_TARGETS='cooja'
+  - BUILD_TYPE="cooja-checkstyle"
