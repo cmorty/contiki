@@ -8,29 +8,49 @@ sourceSets {
     }
 }
 
+// ---- Mspsim
 task buildMspsimJar(type: GradleBuild) {
     buildFile = 'importedmspsimBuild.gradle'
     tasks = ['jar']
-}
-task buildCoffeeJar(type: GradleBuild) {
-    buildFile = '../../../coffee-manager/build.gradle'
-    tasks = ["jar"]
 }
 task copyMspsimJar(type: Copy, dependsOn: buildMspsimJar) {
     from "../../../mspsim/mspsim.jar"
     into 'lib'
 }
-task copyJipv6Jar(type: Copy) {
-    from '../../../mspsim/lib/jipv6.jar'
-    into 'lib'
+task cleanMspsim(type: GradleBuild) {
+    buildFile = 'importedmspsimBuild.gradle'
+    tasks = ['clean']
+}
+clean.dependsOn cleanMspsim
+
+
+// ---- Coffee
+task buildCoffeeJar(type: GradleBuild) {
+    buildFile = '../../../coffee-manager/build.gradle'
+    tasks = ["jar"]
 }
 task copyCoffeeJar(type: Copy, dependsOn: buildCoffeeJar) {
     from '../../../coffee-manager/coffee.jar'
     into 'lib'
 }
+task cleanCoffee(type: GradleBuild) {
+    buildFile = '../../../coffee-manager/build.gradle'
+    tasks = ["clean"]
+}
+clean.dependsOn cleanCoffee
+
+// ---- Jipv6Jar
+task copyJipv6Jar(type: Copy) {
+    from '../../../mspsim/lib/jipv6.jar'
+    into 'lib'
+}
+
+
 compileJava.dependsOn copyMspsimJar
 compileJava.dependsOn copyCoffeeJar
 compileJava.dependsOn copyJipv6Jar
+
+
 
 repositories {
    jcenter()
