@@ -70,7 +70,7 @@ public class Msp802154Radio extends Radio implements CustomDataRadio {
   private RadioEvent lastEvent = RadioEvent.UNKNOWN;
 
   private final MspMote mote;
-  private final Radio802154 radio;
+  private final CC2420 radio;
 
   private boolean isInterfered = false;
   private boolean isTransmitting = false;
@@ -84,7 +84,7 @@ public class Msp802154Radio extends Radio implements CustomDataRadio {
 
   public Msp802154Radio(Mote m) {
     this.mote = (MspMote)m;
-    this.radio = this.mote.getCPU().getChip(Radio802154.class);
+    this.radio = this.mote.getCPU().getChip(CC2420.class);
     if (radio == null) {
       throw new IllegalStateException("Mote is not equipped with an IEEE 802.15.4 radio");
     }
@@ -316,7 +316,9 @@ public class Msp802154Radio extends Radio implements CustomDataRadio {
     isInterfered = true;
     isReceiving = false;
     lastIncomingPacket = null;
-
+    radio.interfered();
+    
+    
     lastEvent = RadioEvent.RECEPTION_INTERFERED;
     /*logger.debug("----- 802.15.4 RECEPTION INTERFERED -----");*/
     setChanged();

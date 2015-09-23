@@ -268,7 +268,7 @@ public abstract class AbstractRadioMedium extends RadioMedium {
 					RadioConnection newConnection = createConnections(radio);
 					activeConnections.add(newConnection);
 					
-					for (Radio r : newConnection.getAllDestinations()) {
+					for (Radio r : newConnection.getDestinations()) {
 						if (newConnection.getDestinationDelay(r) == 0) {
 							r.signalReceptionStart();
 						} else {
@@ -348,7 +348,7 @@ public abstract class AbstractRadioMedium extends RadioMedium {
 						return;
 					}
 					
-					for (Radio dstRadio : connection.getAllDestinations()) {
+					for (Radio dstRadio : connection.getDestinations()) {
 						if (!(dstRadio instanceof CustomDataRadio) || 
 						    !((CustomDataRadio) dstRadio).canReceiveFrom((CustomDataRadio)radio)) {
 							/* Radios communicate via radio packets */

@@ -30,16 +30,17 @@
 
 package org.contikios.cooja.radiomediums;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.jdom.Element;
-
 import org.contikios.cooja.ClassDescription;
 import org.contikios.cooja.Mote;
 import org.contikios.cooja.RadioConnection;
@@ -226,7 +227,19 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
     }
     return edgesTable.get(source);
   }
+  
 
+  private Edge getEdge(Radio source, Radio dstRadio) {
+    for(Edge e :  getEdges()) {
+      if(e.source == source  && e.superDest.radio == dstRadio) return e;
+    }
+    return null;
+  }
+  
+  private long capture() {
+    return 1;
+  }
+  
   public RadioConnection createConnections(Radio source) {
     if (edgesDirty) {
       analyzeEdges();
@@ -262,12 +275,6 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
         continue;
       }
       
-      if (dest.radio.isInterfered()) {
-        /* Fail: radio is interfered in another connection */
-        /*logger.info(source + ": Fail, interfered");*/
-        newConn.addInterfered(dest.radio);
-        continue;
-      }
 
       int srcc = source.getChannel();
       int dstc = dest.radio.getChannel(); 
@@ -277,35 +284,73 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
       }
       
       if (dest.radio.isReceiving()) {
-         /* Fail: radio is already actively receiving */
-         /*logger.info(source + ": Fail, receiving");*/
-         newConn.addInterfered(dest.radio);
-
-         /* We will also interfere with the other connection */
-         dest.radio.interfereAnyReception();
-         
-         // Find connection, that is sending to that radio
-         // and mark the destination as interfered
+        // Find edges, that are weaker, stronger or interfering
+        Edge myEdge = getEdge(source, dest.radio);
+        double mySig = myEdge.superDest.signal;
+        ArrayList<RadioConnection> lWeak = new ArrayList<RadioConnection> ();
+        ArrayList<RadioConnection>  lInter = new ArrayList<RadioConnection> ();
+        ArrayList< RadioConnection>  lStrong = new ArrayList<RadioConnection> ();
          for (RadioConnection conn : getActiveConnections()) {
-           for (Radio dstRadio : conn.getDestinations()) {
+           for (Radio dstRadio : conn.getAllDestinations()) {//TODO All
              if (dstRadio == dest.radio) {
-               conn.addInterfered(dest.radio);;
-               break;
+               Edge e = getEdge(conn.getSource(), dest.radio);
+               DGRMDestinationRadio dr = e.superDest;
+               if(dr.signal < mySig - capture()) lWeak.add( conn);
+               else if(dr.signal <= mySig + capture()) lInter.add(conn);
+               else lStrong.add(conn);
              }
            }
-         }        
-         continue;
+         }
+
+        if (!lStrong.isEmpty()) { // Stronger signal - I'm irrelevant
+          logger.warn("Other signal is stronger");
+          newConn.addInterfered(dest.radio);
+          continue;
+        } 
+        if (!lInter.isEmpty()) { // Interfering
+          //logger.warn("We're interfering");
+          newConn.addInterfered(dest.radio);
+          // Interfere Connections
+          for (RadioConnection inter : lInter) {
+            if (!inter.isInterfered(dest.radio)) inter.addInterfered(dest.radio);
+          }
+          for (RadioConnection inter : lWeak) {
+            if (!inter.isInterfered(dest.radio)) inter.addInterfered(dest.radio);
+          }
+          dest.radio.interfereAnyReception();
+          continue;
+        } 
+        
+        
+        logger.warn("I'm stronger!");
+        //We can transmit! Lets interfere the others
+        for (RadioConnection inter : lInter) {
+          if (!inter.isInterfered(dest.radio)) inter.addInterfered(dest.radio);
+        }
+        for (RadioConnection inter : lWeak) {
+          if (!inter.isInterfered(dest.radio)) inter.addInterfered(dest.radio);
+        }
+        dest.radio.interfereAnyReception();
       }
             
       if (dest.ratio < 1.0 && random.nextDouble() > dest.ratio) {
     	/* Fail: Reception ratio */
         /*logger.info(source + ": Fail, randomly");*/
+        dest.radio.interfereAnyReception();
         newConn.addInterfered(dest.radio);
         continue;
       }
 
       /* Success: radio starts receiving */
       /*logger.info(source + ": OK: " + dest.radio);*/
+      
+      //Uninterfere Radio
+      if(dest.radio.isInterfered()) {
+        
+        dest.radio.signalReceptionEnd();
+      }
+      
+      //Add Connection
       newConn.addDestination(dest.radio, dest.delay);
     }
 
